@@ -7,11 +7,12 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import trailerPlaceholder1 from '@/assets/trailer-placeholder-1.png';
 import trailerPlaceholder2 from '@/assets/trailer-placeholder-2.png';
 import trailerPlaceholder3 from '@/assets/trailer-placeholder-3.png';
+import { videos } from '@/lib/videos';
 
 const trailerVideos = [
-  { id: 1, src: '/videos/trailer-1.mp4', placeholder: trailerPlaceholder1 },
-  { id: 2, src: '/videos/trailer-2.mp4', placeholder: trailerPlaceholder2 },
-  { id: 3, src: '/videos/trailer-3.mp4', placeholder: trailerPlaceholder3 },
+  { id: 1, src: videos.trailer1, placeholder: trailerPlaceholder1 },
+  { id: 2, src: videos.trailer2, placeholder: trailerPlaceholder2 },
+  { id: 3, src: videos.trailer3, placeholder: trailerPlaceholder3 },
 ];
 
 const ComicsTrailersSection = () => {
