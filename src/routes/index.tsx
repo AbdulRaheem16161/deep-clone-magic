@@ -1,29 +1,54 @@
 import { createFileRoute } from "@tanstack/react-router";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import GamesSection from "@/components/GamesSection";
+import ComicsTrailersSection from "@/components/ComicsTrailersSection";
+import PortfolioSection from "@/components/PortfolioSection";
+import ServicesSection from "@/components/ServicesSection";
+import MeetTheTeam from "@/components/MeetTheTeam";
+import About from "@/components/About";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import VerticalNav from "@/components/VerticalNav";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "DeepCut Originals — Games, Art & 3D" },
+      {
+        name: "description",
+        content:
+          "DeepCut Originals creates mobile games, animated trailers, character art, environments and 3D models.",
+      },
+      { property: "og:title", content: "DeepCut Originals" },
+      {
+        property: "og:description",
+        content:
+          "Mobile games, animated trailers, character art, environments and 3D models.",
+      },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <Header />
+      <VerticalNav />
+      <main>
+        <Hero />
+        <GamesSection />
+        <ComicsTrailersSection />
+        <PortfolioSection />
+        <ServicesSection />
+        <MeetTheTeam />
+        <About />
+        <Contact />
+      </main>
+      <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }
