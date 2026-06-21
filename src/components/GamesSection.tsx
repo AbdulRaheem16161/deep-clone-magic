@@ -1,3 +1,4 @@
+import { videos } from '@/lib/videos';
 import { useState, useRef, useEffect } from 'react';
 import { Download, X, Volume2, VolumeX, Loader2, Monitor } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -17,9 +18,9 @@ const preloadAssets = () => {
 
   // Priority 2-4: Game videos in order
   const videoUrls = [
-    '/videos/cure-infection.mp4',
-    '/videos/raptor-hunter.mp4',
-    '/videos/find-imposter.mp4'
+    videos.cureInfection,
+    videos.raptorHunter,
+    videos.findImposter
   ];
   
   videoUrls.forEach((url, index) => {
@@ -72,7 +73,7 @@ const games = [{
   genre: 'Survival Shooting',
   description: 'A survival FPS developed in just six days, where you help Dr. Cure and his nurse fight a viral outbreak caused by his brother.',
   icon: cureInfectionIcon,
-  previewVideo: '/videos/cure-infection.mp4',
+  previewVideo: videos.cureInfection,
   previewPlaceholder: gameVideoPlaceholderCure,
   link: 'https://goncal0.itch.io/cure-and-infection',
   screenshots: [cureInfection1, cureInfection2, cureInfection3, cureInfection4, cureInfection5, cureInfection6]
@@ -82,7 +83,7 @@ const games = [{
   genre: 'Shooter',
   description: 'Armed with a shotgun and pistol, you must hunt fast and relentless raptors in a survival challenge.',
   icon: raptorHunterIcon,
-  previewVideo: '/videos/raptor-hunter.mp4',
+  previewVideo: videos.raptorHunter,
   previewPlaceholder: gameVideoPlaceholderRaptor,
   link: 'https://raptorbot.itch.io/raptor-hunter',
   screenshots: [raptorHunter1, raptorHunter2, raptorHunter3, raptorHunter4, raptorHunter5, raptorHunter6]
@@ -92,7 +93,7 @@ const games = [{
   genre: 'Role-Playing / Social Deduction',
   description: 'Uncover and eliminate the imposter before they eliminate the crew. (Among Us Fan-Game)',
   icon: findImposterIcon,
-  previewVideo: '/videos/find-imposter.mp4',
+  previewVideo: videos.findImposter,
   previewPlaceholder: gameVideoPlaceholderImposter,
   link: 'https://raptorbot.itch.io/find-the-imposter',
   screenshots: [findImposter1, findImposter2, findImposter3, findImposter4, findImposter5, findImposter6]

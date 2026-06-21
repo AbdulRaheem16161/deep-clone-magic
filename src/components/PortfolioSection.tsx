@@ -1,3 +1,4 @@
+import { videos } from '@/lib/videos';
 import { useState, useRef, useEffect } from 'react';
 import { X, Loader2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogClose } from '@/components/ui/dialog';
@@ -46,28 +47,28 @@ import placeholderHuts from '@/assets/placeholder-huts.png';
 import placeholderJapaneseHouse from '@/assets/placeholder-japanese-house.png';
 const models3DVideos = [{
   id: 1,
-  video: '/videos/3d-model-alosaurus.mp4',
+  video: videos.alosaurus,
   placeholder: placeholderAlosaurus,
   featured: true
 }, {
   id: 2,
-  video: '/videos/3d-model-6-upload.mp4',
+  video: videos.model6Upload,
   placeholder: model3DPlaceholder
 }, {
   id: 3,
-  video: '/videos/3d-model-car.mp4',
+  video: videos.car,
   placeholder: placeholderCar
 }, {
   id: 4,
-  video: '/videos/3d-model-trex.mp4',
+  video: videos.modelTrex,
   placeholder: placeholderTrex
 }, {
   id: 5,
-  video: '/videos/3d-model-huts.mp4',
+  video: videos.modelHuts,
   placeholder: placeholderHuts
 }, {
   id: 6,
-  video: '/videos/3d-model-japanese-house.mp4',
+  video: videos.japaneseHouse,
   placeholder: placeholderJapaneseHouse
 }];
 
