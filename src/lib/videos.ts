@@ -16,6 +16,9 @@ import threeDHeader from "../assets/3d-header.mp4.asset.json";
 
 export const videos = {
   trailer1: trailer1.url,
+  gamesHeader: gamesHeader.url,
+  trailersHeader: trailersHeader.url,
+  threeDHeader: threeDHeader.url,
   trailer2: trailer2.url,
   trailer3: trailer3.url,
   cureInfection: cureInfection.url,
