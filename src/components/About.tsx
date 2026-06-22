@@ -23,7 +23,7 @@ const About = () => {
                 <Users className="w-8 h-8 text-background" />
               </div>
               <div>
-                <div className="text-5xl font-inter font-bold text-foreground animate-count">6</div>
+                <div className="text-5xl font-inter font-bold text-foreground animate-count">4</div>
                 <div className="text-muted-foreground text-sm font-medium">Team Members</div>
               </div>
             </div>
@@ -34,7 +34,7 @@ const About = () => {
                 <Gamepad2 className="w-8 h-8 text-background" />
               </div>
               <div>
-                <div className="text-5xl font-inter font-bold text-foreground animate-count">3</div>
+                <div className="text-5xl font-inter font-bold text-foreground animate-count">5</div>
                 <div className="text-muted-foreground text-sm font-medium">Games Released</div>
               </div>
             </div>

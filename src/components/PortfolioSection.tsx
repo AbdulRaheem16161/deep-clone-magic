@@ -272,11 +272,16 @@ const PortfolioSection = () => {
         <div id="3d-models" className="mb-20">
           <SectionHeader title="3D Models" subtitle="High-quality 3D assets and animations" />
 
-          {/* All Models in a Grid - 1 col mobile, 3 cols desktop */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {models3DVideos.map(model => <div key={model.id}>
-                <Model3DCard model={model} featured={model.featured} onVideoClick={setFullscreenVideo} />
-              </div>)}
+          <div className="flex justify-center">
+            <video
+              src={videos.threeDHeader}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="w-full max-w-5xl rounded-2xl border border-border/40 shadow-xl object-contain"
+            />
           </div>
         </div>
 
