@@ -20,6 +20,13 @@ import cureInfection4 from '@/assets/cure-infection-screenshot-4.png';
 import cureInfection5 from '@/assets/cure-infection-screenshot-5.png';
 import cureInfection6 from '@/assets/cure-infection-screenshot-6.png';
 
+import doomIcon from '@/assets/icons/doom.png';
+import yomaIcon from '@/assets/icons/yoma.png';
+import gumperIcon from '@/assets/icons/gumper.png';
+import amongusIcon from '@/assets/icons/amongus.png';
+import dinoIcon from '@/assets/icons/dino.png';
+import { videos } from '@/lib/videos';
+
 type Game = {
   id: string;
   title: string;
