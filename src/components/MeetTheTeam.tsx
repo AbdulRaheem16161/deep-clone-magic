@@ -6,7 +6,7 @@ import { User } from 'lucide-react';
 // Import profile images
 import abdulraheemImg from '@/assets/abdulraheem-new.png';
 import kairesImg from '@/assets/kaires.jpg';
-import aliKhanImg from '@/assets/ali-khan.jpg';
+import snekRbImg from '@/assets/snek-rb.png';
 import raptorbotImg from '@/assets/raptorbot.jpg';
 
 // Custom social media icons
@@ -87,27 +87,10 @@ const teamMembers: TeamMember[] = [
     role: '3D Modeler & Animator',
     intro: 'I bring characters and worlds to life through 3D art and animation.',
     initials: 'SR',
+    image: snekRbImg,
     socials: {
       discord: 'https://discord.com/users/1368565704139476992'
     }
-  },
-  {
-    name: 'Ali Khan',
-    role: 'Programmer',
-    intro: 'I craft robust game mechanics and interactive systems.',
-    initials: 'AK',
-    image: aliKhanImg,
-    socials: {
-      whatsapp: 'https://wa.me/923344535096',
-      linkedin: 'https://linkedin.com/in/muhammadalikhan9909'
-    }
-  },
-  {
-    name: 'Faris',
-    role: '3D Modeler',
-    intro: 'I make detailed game-ready 3D assets and environments.',
-    initials: 'FA',
-    socials: {}
   },
   {
     name: 'Raptor Bot',

@@ -20,6 +20,13 @@ import cureInfection4 from '@/assets/cure-infection-screenshot-4.png';
 import cureInfection5 from '@/assets/cure-infection-screenshot-5.png';
 import cureInfection6 from '@/assets/cure-infection-screenshot-6.png';
 
+import doomIcon from '@/assets/icons/doom.png';
+import yomaIcon from '@/assets/icons/yoma.png';
+import gumperIcon from '@/assets/icons/gumper.png';
+import amongusIcon from '@/assets/icons/amongus.png';
+import dinoIcon from '@/assets/icons/dino.png';
+import { videos } from '@/lib/videos';
+
 type Game = {
   id: string;
   title: string;
@@ -38,6 +45,7 @@ const games: Game[] = [
     id: 'doom',
     title: 'Doom',
     tagline: 'Classic FPS — reimagined',
+    icon: doomIcon,
     iconFallback: 'D',
     downloadUrl: '#',
     videos: [
@@ -67,6 +75,7 @@ const games: Game[] = [
     id: 'yoma',
     title: 'YOMA',
     tagline: 'Gameplay & Devlog coming soon',
+    icon: yomaIcon,
     iconFallback: 'Y',
     downloadUrl: '#',
     comingSoon: true,
@@ -76,6 +85,7 @@ const games: Game[] = [
     id: 'gumper',
     title: 'Gumper Bumper World',
     tagline: 'Bumper-cart chaos',
+    icon: gumperIcon,
     iconFallback: 'G',
     downloadUrl: '#',
     videos: [
@@ -87,6 +97,7 @@ const games: Game[] = [
     id: 'amongus3d',
     title: 'AmongUs 3D',
     tagline: 'Social deduction, 3D',
+    icon: amongusIcon,
     iconFallback: 'A',
     downloadUrl: '#',
     videos: [
@@ -98,6 +109,7 @@ const games: Game[] = [
     id: 'dino',
     title: 'Dino Arena',
     tagline: 'Development in progress',
+    icon: dinoIcon,
     iconFallback: 'D',
     inProgress: true,
     videos: [{ label: 'Devlog', youtubeId: 'FfPBt5r1db8' }],
@@ -276,22 +288,17 @@ const GamesSection = () => {
           </p>
         </div>
 
-        {/* Header GIF / video placeholder — replace src once provided */}
-        <div className="mb-10 rounded-2xl overflow-hidden border border-border/40 bg-muted aspect-video max-h-[420px] flex items-center justify-center">
-          {/* TODO: replace placeholder with provided header video/GIF */}
+        {/* Header video — autoplay loop, no audio */}
+        <div className="mb-12 flex justify-center">
           <video
+            src={videos.gamesHeader}
             autoPlay
             loop
             muted
             playsInline
-            poster=""
-            className="w-full h-full object-cover"
-          >
-            {/* src will be added once user provides the video */}
-          </video>
-          <span className="absolute text-muted-foreground text-sm font-orbitron">
-            Header video — coming soon
-          </span>
+            preload="auto"
+            className="w-full max-w-5xl rounded-2xl border border-border/40 shadow-xl object-contain"
+          />
         </div>
 
         {/* Game Cards */}
