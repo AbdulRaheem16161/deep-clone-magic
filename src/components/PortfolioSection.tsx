@@ -234,7 +234,7 @@ const PortfolioSection = () => {
   const [zoomedArtImage, setZoomedArtImage] = useState<string | null>(null);
   const [fullscreenVideo, setFullscreenVideo] = useState<string | null>(null);
   return <section id="portfolio" className="py-20 bg-background">
-      <div className="container mx-auto px-4 lg:px-8 text-muted-foreground">
+      <div className="container mx-auto px-4 lg:pl-24 lg:pr-12 text-muted-foreground">
         {/* 1. ART SECTION */}
         <div id="art" className="mb-20">
           <SectionHeader title="Art" subtitle="Digital art and illustrations" />

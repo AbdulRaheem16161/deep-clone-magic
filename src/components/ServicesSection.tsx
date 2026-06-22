@@ -136,7 +136,7 @@ const ServicesSection = () => {
 
   return (
     <section id="services" className="py-20 bg-secondary">
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container mx-auto px-4 lg:pl-24 lg:pr-12">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-inter font-bold mb-6">

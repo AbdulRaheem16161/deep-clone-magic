@@ -349,7 +349,7 @@ const GameCard = ({
 const GamesSection = () => {
   return (
     <section id="games" className="py-20 bg-background">
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container mx-auto px-4 lg:pl-24 lg:pr-12">
         {/* Section Header */}
         <div className="mb-8">
           <h3 className="text-2xl md:text-3xl font-orbitron font-bold text-foreground">Games</h3>
