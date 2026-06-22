@@ -256,7 +256,7 @@ const GameRow = ({ game }: { game: Game }) => {
               />
             )}
           </DialogContent>
-        </Drawer>
+        </Dialog>
       </CardContent>
     </Card>
   );
