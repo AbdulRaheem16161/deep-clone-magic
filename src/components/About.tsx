@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { UserPlus, Users, Gamepad2 } from 'lucide-react';
 const About = () => {
   return <section id="about" className="py-20 bg-secondary">
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container mx-auto px-4 lg:pl-24 lg:pr-12">
         {/* About Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-inter font-bold mb-6">
