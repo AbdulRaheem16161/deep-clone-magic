@@ -1,8 +1,9 @@
 import { videos } from '@/lib/videos';
 import { useState, useRef, useEffect } from 'react';
-import { Download, Volume2, VolumeX, Loader2 } from 'lucide-react';
+import { Download, X, Volume2, VolumeX, Loader2, Monitor } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogClose } from '@/components/ui/dialog';
 import { Slider } from '@/components/ui/slider';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -42,6 +43,25 @@ import gameVideoPlaceholderCure from '@/assets/game-placeholder-cure.png';
 import gameVideoPlaceholderRaptor from '@/assets/game-placeholder-raptor.png';
 import gameVideoPlaceholderImposter from '@/assets/game-placeholder-imposter.png';
 
+// Import game screenshots
+import cureInfection1 from '@/assets/cure-infection-screenshot-1.png';
+import cureInfection2 from '@/assets/cure-infection-screenshot-2.png';
+import cureInfection3 from '@/assets/cure-infection-screenshot-3.png';
+import cureInfection4 from '@/assets/cure-infection-screenshot-4.png';
+import cureInfection5 from '@/assets/cure-infection-screenshot-5.png';
+import cureInfection6 from '@/assets/cure-infection-screenshot-6.png';
+import raptorHunter1 from '@/assets/raptor-hunter-screenshot-1.png';
+import raptorHunter2 from '@/assets/raptor-hunter-screenshot-2.png';
+import raptorHunter3 from '@/assets/raptor-hunter-screenshot-3.png';
+import raptorHunter4 from '@/assets/raptor-hunter-screenshot-4.png';
+import raptorHunter5 from '@/assets/raptor-hunter-screenshot-5.png';
+import raptorHunter6 from '@/assets/raptor-hunter-screenshot-6.png';
+import findImposter1 from '@/assets/find-imposter-screenshot-1.png';
+import findImposter2 from '@/assets/find-imposter-screenshot-2.png';
+import findImposter3 from '@/assets/find-imposter-screenshot-3.png';
+import findImposter4 from '@/assets/find-imposter-screenshot-4.png';
+import findImposter5 from '@/assets/find-imposter-screenshot-5.png';
+import findImposter6 from '@/assets/find-imposter-screenshot-6.png';
 import findImposterIcon from '@/assets/find-the-imposter-icon.png';
 import cureInfectionIcon from '@/assets/cure-infection-icon.png';
 import raptorHunterIcon from '@/assets/raptor-hunter-icon.png';
@@ -56,6 +76,7 @@ const games = [{
   previewVideo: videos.cureInfection,
   previewPlaceholder: gameVideoPlaceholderCure,
   link: 'https://goncal0.itch.io/cure-and-infection',
+  screenshots: [cureInfection1, cureInfection2, cureInfection3, cureInfection4, cureInfection5, cureInfection6]
 }, {
   id: 2,
   title: 'Raptor Hunter',
@@ -65,6 +86,7 @@ const games = [{
   previewVideo: videos.raptorHunter,
   previewPlaceholder: gameVideoPlaceholderRaptor,
   link: 'https://raptorbot.itch.io/raptor-hunter',
+  screenshots: [raptorHunter1, raptorHunter2, raptorHunter3, raptorHunter4, raptorHunter5, raptorHunter6]
 }, {
   id: 4,
   title: 'Find The Imposter',
@@ -74,6 +96,7 @@ const games = [{
   previewVideo: videos.findImposter,
   previewPlaceholder: gameVideoPlaceholderImposter,
   link: 'https://raptorbot.itch.io/find-the-imposter',
+  screenshots: [findImposter1, findImposter2, findImposter3, findImposter4, findImposter5, findImposter6]
 }];
 
 // Video Player Component
@@ -244,32 +267,60 @@ const GameCard = ({
 }: {
   game: (typeof games)[0];
 }) => {
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+
   return (
     <Card className="w-full overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm">
       <CardContent className="p-4 md:p-6">
-        {/* Video Preview */}
-        <div className="w-full aspect-video">
-          <VideoPlayer
-            src={(game as any).previewVideo}
-            placeholder={game.previewPlaceholder}
-          />
+        {/* Screenshots (2x3 grid) + Video Preview side by side */}
+        <div className="flex flex-col lg:flex-row gap-4">
+          {/* Left: Screenshots 2x3 Grid - larger on mobile */}
+          <div className="lg:flex-1">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2">
+              {game.screenshots.slice(0, 6).map((screenshot, index) => (
+                <div
+                  key={index}
+                  className="aspect-video rounded-md sm:rounded-lg overflow-hidden cursor-pointer border-2 border-border/30 hover:border-primary/50 transition-all hover:scale-[1.02] shadow-md hover:shadow-lg"
+                  onClick={() => setZoomedImage(screenshot)}
+                >
+                  <img
+                    src={screenshot}
+                    alt={`${game.title} screenshot ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: Video Preview */}
+          <div className="lg:w-[40%]">
+            <VideoPlayer 
+              src={(game as any).previewVideo} 
+              placeholder={game.previewPlaceholder} 
+            />
+          </div>
         </div>
 
         {/* Control Row */}
         <div className="flex flex-wrap items-center gap-3 mt-4 pt-4 border-t border-border/30">
+          {/* Game Icon */}
           <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/50 flex-shrink-0">
             <img src={game.icon} alt={`${game.title} icon`} className="w-full h-full object-cover" />
           </div>
 
+          {/* Game Title */}
           <div className="flex-1 min-w-0">
             <h3 className="font-orbitron font-bold text-lg text-foreground">{game.title}</h3>
             <p className="text-sm text-muted-foreground">{game.genre}</p>
           </div>
 
+          {/* Buttons */}
           <div className="flex flex-wrap gap-2">
-            <Button
-              size="sm"
-              onClick={() => window.open(game.link, '_blank')}
+            <Button 
+              size="sm" 
+              onClick={() => window.open(game.link, '_blank')} 
               className="gap-2 bg-foreground hover:bg-foreground/90 text-background md:px-4 px-3"
             >
               <Download className="h-4 w-4 hidden md:block" />
@@ -278,6 +329,18 @@ const GameCard = ({
             </Button>
           </div>
         </div>
+
+        {/* Zoomed Image Dialog */}
+        <Dialog open={!!zoomedImage} onOpenChange={() => setZoomedImage(null)}>
+          <DialogContent className="max-w-[95vw] max-h-[95vh] p-0 bg-black/95">
+            <DialogClose className="absolute right-4 top-4 z-10">
+              <X className="h-6 w-6 text-white" />
+            </DialogClose>
+            {zoomedImage && (
+              <img src={zoomedImage} alt="Zoomed screenshot" className="w-full h-full object-contain" />
+            )}
+          </DialogContent>
+        </Dialog>
       </CardContent>
     </Card>
   );

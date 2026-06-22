@@ -1,4 +1,4 @@
-import { Gamepad2, Mail } from 'lucide-react';
+import { Gamepad2, Film, Palette, TreePine, Box } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Tooltip,
@@ -9,7 +9,10 @@ import {
 
 const navItems = [
   { label: 'Games', icon: Gamepad2, target: 'games' },
-  { label: 'Contact', icon: Mail, target: 'contact' },
+  { label: 'Trailers', icon: Film, target: 'trailers' },
+  { label: 'Art', icon: Palette, target: 'art' },
+  { label: 'Environments', icon: TreePine, target: 'environments' },
+  { label: '3D Models', icon: Box, target: '3d-models' },
 ];
 
 const VerticalNav = () => {
