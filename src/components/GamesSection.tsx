@@ -288,22 +288,17 @@ const GamesSection = () => {
           </p>
         </div>
 
-        {/* Header GIF / video placeholder — replace src once provided */}
-        <div className="mb-10 rounded-2xl overflow-hidden border border-border/40 bg-muted aspect-video max-h-[420px] flex items-center justify-center">
-          {/* TODO: replace placeholder with provided header video/GIF */}
+        {/* Header video — autoplay loop, no audio */}
+        <div className="mb-12 flex justify-center">
           <video
+            src={videos.gamesHeader}
             autoPlay
             loop
             muted
             playsInline
-            poster=""
-            className="w-full h-full object-cover"
-          >
-            {/* src will be added once user provides the video */}
-          </video>
-          <span className="absolute text-muted-foreground text-sm font-orbitron">
-            Header video — coming soon
-          </span>
+            preload="auto"
+            className="w-full max-w-5xl rounded-2xl border border-border/40 shadow-xl object-contain"
+          />
         </div>
 
         {/* Game Cards */}
