@@ -75,6 +75,7 @@ const games: Game[] = [
     id: 'yoma',
     title: 'YOMA',
     tagline: 'Gameplay & Devlog coming soon',
+    icon: yomaIcon,
     iconFallback: 'Y',
     downloadUrl: '#',
     comingSoon: true,
@@ -84,6 +85,7 @@ const games: Game[] = [
     id: 'gumper',
     title: 'Gumper Bumper World',
     tagline: 'Bumper-cart chaos',
+    icon: gumperIcon,
     iconFallback: 'G',
     downloadUrl: '#',
     videos: [
@@ -95,6 +97,7 @@ const games: Game[] = [
     id: 'amongus3d',
     title: 'AmongUs 3D',
     tagline: 'Social deduction, 3D',
+    icon: amongusIcon,
     iconFallback: 'A',
     downloadUrl: '#',
     videos: [
@@ -106,6 +109,7 @@ const games: Game[] = [
     id: 'dino',
     title: 'Dino Arena',
     tagline: 'Development in progress',
+    icon: dinoIcon,
     iconFallback: 'D',
     inProgress: true,
     videos: [{ label: 'Devlog', youtubeId: 'FfPBt5r1db8' }],
