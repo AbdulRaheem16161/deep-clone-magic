@@ -48,7 +48,7 @@ const About = () => {
             <span className="text-foreground">Our Team</span>
           </h3>
           <p className="text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed text-center text-sm md:text-lg">
-            We are a small indie studio of six and we are always open to welcoming new people. We especially enjoy working with beginners who want to learn grow and start their game development journey with us. If you have passion and a willingness to improve, you belong here.
+            We are a small indie studio of four and we are always open to welcoming new people. We especially enjoy working with beginners who want to learn grow and start their game development journey with us. If you have passion and a willingness to improve, you belong here.
           </p>
           <Button className="bg-foreground hover:bg-foreground text-background hover:text-background text-base px-8 py-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg" onClick={() => document.getElementById('contact')?.scrollIntoView({
           behavior: 'smooth'
