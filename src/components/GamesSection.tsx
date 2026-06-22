@@ -45,6 +45,7 @@ const games: Game[] = [
     id: 'doom',
     title: 'Doom',
     tagline: 'Classic FPS — reimagined',
+    icon: doomIcon,
     iconFallback: 'D',
     downloadUrl: '#',
     videos: [
