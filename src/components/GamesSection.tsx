@@ -25,6 +25,16 @@ import yomaIcon from '@/assets/icons/yoma.png';
 import gumperIcon from '@/assets/icons/gumper.png';
 import amongusIcon from '@/assets/icons/amongus.png';
 import dinoIcon from '@/assets/icons/dino.png';
+import carhordeIcon from '@/assets/icons/carhorde.png.asset.json';
+import yoma1 from '@/assets/yoma/yoma-1.png.asset.json';
+import yoma2 from '@/assets/yoma/yoma-2.png.asset.json';
+import yoma3 from '@/assets/yoma/yoma-3.png.asset.json';
+import yoma4 from '@/assets/yoma/yoma-4.png.asset.json';
+import yoma5 from '@/assets/yoma/yoma-5.png.asset.json';
+import yoma6 from '@/assets/yoma/yoma-6.png.asset.json';
+import yoma7 from '@/assets/yoma/yoma-7.png.asset.json';
+import yoma8 from '@/assets/yoma/yoma-8.png.asset.json';
+import yomaCover from '@/assets/yoma/yoma-cover.jpg.asset.json';
 import { videos } from '@/lib/videos';
 
 type Game = {
@@ -74,12 +84,23 @@ const games: Game[] = [
   {
     id: 'yoma',
     title: 'YOMA',
-    tagline: 'Gameplay & Devlog coming soon',
+    tagline: 'Horror Escape — Story Based',
     icon: yomaIcon,
     iconFallback: 'Y',
     downloadUrl: '#',
     comingSoon: true,
     videos: [],
+    screenshots: [
+      yomaCover.url,
+      yoma1.url,
+      yoma2.url,
+      yoma3.url,
+      yoma4.url,
+      yoma5.url,
+      yoma6.url,
+      yoma7.url,
+      yoma8.url,
+    ],
   },
   {
     id: 'gumper',
@@ -118,6 +139,7 @@ const games: Game[] = [
     id: 'carhorde',
     title: 'Car Horde Survival',
     tagline: 'Development in progress',
+    icon: carhordeIcon.url,
     iconFallback: 'C',
     inProgress: true,
     videos: [{ label: 'Devlog', youtubeId: 'FY7GR2Z-Pgs' }],
@@ -154,7 +176,10 @@ const GameRow = ({ game }: { game: Game }) => {
   const hasMedia = game.videos.length > 0 || (game.screenshots && game.screenshots.length > 0);
 
   return (
-    <Card className="overflow-hidden border-border/50 bg-card/60 backdrop-blur-sm card-interactive">
+    <Card
+      onClick={() => hasMedia && setOpen(true)}
+      className={`overflow-hidden border-border/50 bg-card/60 backdrop-blur-sm card-interactive ${hasMedia ? 'cursor-pointer' : ''}`}
+    >
       <CardContent className="p-4 md:p-5">
         <div className="flex items-center gap-4">
           <GameIcon game={game} />
@@ -172,7 +197,10 @@ const GameRow = ({ game }: { game: Game }) => {
             {game.downloadUrl && !game.inProgress && (
               <Button
                 size="sm"
-                onClick={() => window.open(game.downloadUrl, '_blank')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(game.downloadUrl, '_blank');
+                }}
                 disabled={game.comingSoon}
                 className="gap-2 bg-foreground hover:bg-foreground/90 text-background"
               >
@@ -188,15 +216,7 @@ const GameRow = ({ game }: { game: Game }) => {
             )}
 
             {hasMedia && (
-              <Button
-                size="icon"
-                variant="outline"
-                onClick={() => setOpen(true)}
-                aria-label={`Preview ${game.title}`}
-                className="rounded-full border-primary/40 hover:bg-primary/10"
-              >
-                <ChevronDown className="h-5 w-5 text-primary" />
-              </Button>
+              <ChevronDown className="h-5 w-5 text-primary flex-shrink-0" aria-hidden />
             )}
           </div>
         </div>
@@ -288,18 +308,18 @@ const GamesSection = () => {
           </p>
         </div>
 
-        {/* Header video — autoplay loop, no audio */}
-        <div className="mb-12 flex justify-center">
-          <video
-            src={videos.gamesHeader}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="w-full max-w-5xl rounded-2xl border border-border/40 shadow-xl object-contain"
-          />
-        </div>
+        {/* Header video — autoplay loop, no audio. High priority load. */}
+        <video
+          src={videos.gamesHeader}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          // @ts-expect-error fetchpriority is a valid HTML attribute
+          fetchpriority="high"
+          className="mb-12 w-full rounded-2xl border border-border/40 shadow-xl"
+        />
 
         {/* Game Cards */}
         <div className="space-y-4">

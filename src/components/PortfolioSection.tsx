@@ -272,17 +272,15 @@ const PortfolioSection = () => {
         <div id="3d-models" className="mb-20">
           <SectionHeader title="3D Models" subtitle="High-quality 3D assets and animations" />
 
-          <div className="flex justify-center">
-            <video
-              src={videos.threeDHeader}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              className="w-full max-w-5xl rounded-2xl border border-border/40 shadow-xl object-contain"
-            />
-          </div>
+          <video
+            src={videos.threeDHeader}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="w-full rounded-2xl border border-border/40 shadow-xl"
+          />
         </div>
 
         {/* Zoomed Art Image Dialog */}
