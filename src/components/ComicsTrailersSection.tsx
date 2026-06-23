@@ -6,10 +6,10 @@ const ComicsTrailersSection = () => {
       <div className="container mx-auto px-4 lg:pl-16 lg:pr-4">
         <div className="mb-8">
           <h3 className="text-2xl md:text-3xl font-orbitron font-bold text-foreground">
-            Cut Scenes
+            Trailers
           </h3>
           <p className="text-muted-foreground mt-2">
-            Cinematic cut scenes and comic-style content
+            Cinematic trailers and cut scenes
           </p>
         </div>
 
