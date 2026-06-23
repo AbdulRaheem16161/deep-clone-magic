@@ -25,6 +25,16 @@ import yomaIcon from '@/assets/icons/yoma.png';
 import gumperIcon from '@/assets/icons/gumper.png';
 import amongusIcon from '@/assets/icons/amongus.png';
 import dinoIcon from '@/assets/icons/dino.png';
+import carhordeIcon from '@/assets/icons/carhorde.png.asset.json';
+import yoma1 from '@/assets/yoma/yoma-1.png.asset.json';
+import yoma2 from '@/assets/yoma/yoma-2.png.asset.json';
+import yoma3 from '@/assets/yoma/yoma-3.png.asset.json';
+import yoma4 from '@/assets/yoma/yoma-4.png.asset.json';
+import yoma5 from '@/assets/yoma/yoma-5.png.asset.json';
+import yoma6 from '@/assets/yoma/yoma-6.png.asset.json';
+import yoma7 from '@/assets/yoma/yoma-7.png.asset.json';
+import yoma8 from '@/assets/yoma/yoma-8.png.asset.json';
+import yomaCover from '@/assets/yoma/yoma-cover.jpg.asset.json';
 import { videos } from '@/lib/videos';
 
 type Game = {
@@ -74,12 +84,23 @@ const games: Game[] = [
   {
     id: 'yoma',
     title: 'YOMA',
-    tagline: 'Gameplay & Devlog coming soon',
+    tagline: 'Horror Escape — Story Based',
     icon: yomaIcon,
     iconFallback: 'Y',
     downloadUrl: '#',
     comingSoon: true,
     videos: [],
+    screenshots: [
+      yomaCover.url,
+      yoma1.url,
+      yoma2.url,
+      yoma3.url,
+      yoma4.url,
+      yoma5.url,
+      yoma6.url,
+      yoma7.url,
+      yoma8.url,
+    ],
   },
   {
     id: 'gumper',
