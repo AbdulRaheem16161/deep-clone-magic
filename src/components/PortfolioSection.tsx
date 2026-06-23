@@ -27,16 +27,10 @@ import portrait10 from '@/assets/portrait-10.jpg';
 import portrait11 from '@/assets/portrait-11.jpg';
 import portrait12 from '@/assets/portrait-12.jpg';
 
-// Import environments
-import env1 from '@/assets/env-1.png';
-import env2 from '@/assets/env-2.png';
-import env3 from '@/assets/env-3.png';
-import env4 from '@/assets/env-4.png';
-import env5 from '@/assets/env-5.png';
-import env6 from '@/assets/env-6.png';
-import env7 from '@/assets/env-7.png';
-import env8 from '@/assets/env-8.png';
-import env9 from '@/assets/env-9.png';
+// Import environments (new uploads)
+import envNew1 from '@/assets/env-new/env-1.png.asset.json';
+import envNew2 from '@/assets/env-new/env-2.png.asset.json';
+import envNew3 from '@/assets/env-new/env-3.png.asset.json';
 
 // 3D Models data
 import model3DPlaceholder from '@/assets/3d-model-placeholder.png';
