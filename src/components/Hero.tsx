@@ -13,7 +13,7 @@ const Hero = () => {
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-background">
 
       {/* Content */}
-      <div className="container mx-auto px-4 lg:pl-24 lg:pr-12 relative z-10">
+      <div className="container mx-auto px-4 lg:pl-16 lg:pr-4 relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 pt-24 pb-16">
           {/* Left side - Text and Button */}
           <div className="flex-1 text-center lg:text-left animate-slide-up space-y-8">

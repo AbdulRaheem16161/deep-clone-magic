@@ -297,7 +297,7 @@ const GameRow = ({ game }: { game: Game }) => {
 const GamesSection = () => {
   return (
     <section id="games" className="py-20 bg-background">
-      <div className="container mx-auto px-4 lg:pl-24 lg:pr-12">
+      <div className="container mx-auto px-4 lg:pl-16 lg:pr-4">
         {/* Section Header */}
         <div className="mb-8">
           <h3 className="text-3xl md:text-4xl font-orbitron font-bold text-foreground">
