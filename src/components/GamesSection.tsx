@@ -308,18 +308,18 @@ const GamesSection = () => {
           </p>
         </div>
 
-        {/* Header video — autoplay loop, no audio */}
-        <div className="mb-12 flex justify-center">
-          <video
-            src={videos.gamesHeader}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="w-full max-w-5xl rounded-2xl border border-border/40 shadow-xl object-contain"
-          />
-        </div>
+        {/* Header video — autoplay loop, no audio. High priority load. */}
+        <video
+          src={videos.gamesHeader}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          // @ts-expect-error fetchpriority is a valid HTML attribute
+          fetchpriority="high"
+          className="mb-12 w-full rounded-2xl border border-border/40 shadow-xl"
+        />
 
         {/* Game Cards */}
         <div className="space-y-4">
