@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import gamesHeaderAsset from "../assets/games-header.mp4.asset.json";
 
 function NotFoundComponent() {
   return (
@@ -94,6 +95,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Orbitron:wght@500;700&display=swap",
       },
+      { rel: "preload", as: "video", href: gamesHeaderAsset.url, type: "video/mp4" },
     ],
   }),
   shellComponent: RootShell,

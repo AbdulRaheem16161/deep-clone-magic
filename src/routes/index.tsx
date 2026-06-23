@@ -40,8 +40,8 @@ function Index() {
       <main>
         <Hero />
         <GamesSection />
-        <ComicsTrailersSection />
         <PortfolioSection />
+        <ComicsTrailersSection />
         <ServicesSection />
         <MeetTheTeam />
         <About />
