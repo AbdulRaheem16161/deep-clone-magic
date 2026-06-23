@@ -232,8 +232,8 @@ const PortfolioSection = () => {
           <SectionHeader title="Environments" subtitle="Environment art and world design" />
 
           {/* Environment Images Grid - 1 col mobile, 3 cols desktop */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {environmentsData.map(item => <div key={item.id} className="aspect-video rounded-lg overflow-hidden bg-muted border border-border/30 hover:border-primary/50 transition-all cursor-pointer hover:scale-[1.02]" onClick={() => setZoomedArtImage(item.image)}>
+          <div className="flex flex-col gap-6 max-w-5xl mx-auto">
+            {environmentsData.map(item => <div key={item.id} className="aspect-[16/10] w-full rounded-lg overflow-hidden bg-muted border border-border/30 hover:border-primary/50 transition-all cursor-pointer" onClick={() => setZoomedArtImage(item.image)}>
                 <img src={item.image} alt={`Environment ${item.id}`} className="w-full h-full object-cover" />
               </div>)}
           </div>
