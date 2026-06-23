@@ -139,6 +139,7 @@ const games: Game[] = [
     id: 'carhorde',
     title: 'Car Horde Survival',
     tagline: 'Development in progress',
+    icon: carhordeIcon.url,
     iconFallback: 'C',
     inProgress: true,
     videos: [{ label: 'Devlog', youtubeId: 'FY7GR2Z-Pgs' }],
@@ -175,7 +176,10 @@ const GameRow = ({ game }: { game: Game }) => {
   const hasMedia = game.videos.length > 0 || (game.screenshots && game.screenshots.length > 0);
 
   return (
-    <Card className="overflow-hidden border-border/50 bg-card/60 backdrop-blur-sm card-interactive">
+    <Card
+      onClick={() => hasMedia && setOpen(true)}
+      className={`overflow-hidden border-border/50 bg-card/60 backdrop-blur-sm card-interactive ${hasMedia ? 'cursor-pointer' : ''}`}
+    >
       <CardContent className="p-4 md:p-5">
         <div className="flex items-center gap-4">
           <GameIcon game={game} />
@@ -193,7 +197,10 @@ const GameRow = ({ game }: { game: Game }) => {
             {game.downloadUrl && !game.inProgress && (
               <Button
                 size="sm"
-                onClick={() => window.open(game.downloadUrl, '_blank')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(game.downloadUrl, '_blank');
+                }}
                 disabled={game.comingSoon}
                 className="gap-2 bg-foreground hover:bg-foreground/90 text-background"
               >
@@ -209,15 +216,7 @@ const GameRow = ({ game }: { game: Game }) => {
             )}
 
             {hasMedia && (
-              <Button
-                size="icon"
-                variant="outline"
-                onClick={() => setOpen(true)}
-                aria-label={`Preview ${game.title}`}
-                className="rounded-full border-primary/40 hover:bg-primary/10"
-              >
-                <ChevronDown className="h-5 w-5 text-primary" />
-              </Button>
+              <ChevronDown className="h-5 w-5 text-primary flex-shrink-0" aria-hidden />
             )}
           </div>
         </div>
