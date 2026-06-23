@@ -35,6 +35,11 @@ import yoma6 from '@/assets/yoma/yoma-6.png.asset.json';
 import yoma7 from '@/assets/yoma/yoma-7.png.asset.json';
 import yoma8 from '@/assets/yoma/yoma-8.png.asset.json';
 import yomaCover from '@/assets/yoma/yoma-cover.jpg.asset.json';
+import doom3 from '@/assets/doom/doom-3.png.asset.json';
+import doom6 from '@/assets/doom/doom-6.png.asset.json';
+import doom7 from '@/assets/doom/doom-7.png.asset.json';
+import doom8 from '@/assets/doom/doom-8.png.asset.json';
+import doom9 from '@/assets/doom/doom-9.png.asset.json';
 import { videos } from '@/lib/videos';
 
 type Game = {
@@ -63,6 +68,7 @@ const games: Game[] = [
       { label: 'Devlog 1', youtubeId: '_i2OdAMMVDM' },
       { label: 'Devlog 2', youtubeId: 'VAdKUHrQ3MY' },
     ],
+    screenshots: [doom3.url, doom6.url, doom7.url, doom8.url, doom9.url],
   },
   {
     id: 'cure',
