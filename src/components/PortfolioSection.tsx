@@ -127,34 +127,11 @@ const artCategories = {
 };
 
 // Environments data
-const environmentsData = [{
-  id: 1,
-  image: env1
-}, {
-  id: 2,
-  image: env2
-}, {
-  id: 3,
-  image: env3
-}, {
-  id: 4,
-  image: env4
-}, {
-  id: 5,
-  image: env5
-}, {
-  id: 6,
-  image: env6
-}, {
-  id: 7,
-  image: env7
-}, {
-  id: 8,
-  image: env8
-}, {
-  id: 9,
-  image: env9
-}];
+const environmentsData = [
+  { id: 1, image: envNew1.url },
+  { id: 2, image: envNew2.url },
+  { id: 3, image: envNew3.url },
+];
 
 // 3D Model Card with Placeholder
 const Model3DCard = ({
