@@ -12,7 +12,7 @@ import car from "../../public/videos/3d-model-car.mp4.asset.json";
 import japaneseHouse from "../../public/videos/3d-model-japanese-house.mp4.asset.json";
 import gamesHeader from "../assets/games-header.mp4.asset.json";
 import trailersHeader from "../assets/trailers-header.mp4.asset.json";
-import threeDHeader from "../assets/3d-header.mp4.asset.json";
+import threeDHeader from "../assets/3d-header-new.mp4.asset.json";
 
 export const videos = {
   trailer1: trailer1.url,

@@ -27,16 +27,10 @@ import portrait10 from '@/assets/portrait-10.jpg';
 import portrait11 from '@/assets/portrait-11.jpg';
 import portrait12 from '@/assets/portrait-12.jpg';
 
-// Import environments
-import env1 from '@/assets/env-1.png';
-import env2 from '@/assets/env-2.png';
-import env3 from '@/assets/env-3.png';
-import env4 from '@/assets/env-4.png';
-import env5 from '@/assets/env-5.png';
-import env6 from '@/assets/env-6.png';
-import env7 from '@/assets/env-7.png';
-import env8 from '@/assets/env-8.png';
-import env9 from '@/assets/env-9.png';
+// Import environments (new uploads)
+import envNew1 from '@/assets/env-new/env-1.png.asset.json';
+import envNew2 from '@/assets/env-new/env-2.png.asset.json';
+import envNew3 from '@/assets/env-new/env-3.png.asset.json';
 
 // 3D Models data
 import model3DPlaceholder from '@/assets/3d-model-placeholder.png';
@@ -133,34 +127,11 @@ const artCategories = {
 };
 
 // Environments data
-const environmentsData = [{
-  id: 1,
-  image: env1
-}, {
-  id: 2,
-  image: env2
-}, {
-  id: 3,
-  image: env3
-}, {
-  id: 4,
-  image: env4
-}, {
-  id: 5,
-  image: env5
-}, {
-  id: 6,
-  image: env6
-}, {
-  id: 7,
-  image: env7
-}, {
-  id: 8,
-  image: env8
-}, {
-  id: 9,
-  image: env9
-}];
+const environmentsData = [
+  { id: 1, image: envNew1.url },
+  { id: 2, image: envNew2.url },
+  { id: 3, image: envNew3.url },
+];
 
 // 3D Model Card with Placeholder
 const Model3DCard = ({
@@ -234,7 +205,7 @@ const PortfolioSection = () => {
   const [zoomedArtImage, setZoomedArtImage] = useState<string | null>(null);
   const [fullscreenVideo, setFullscreenVideo] = useState<string | null>(null);
   return <section id="portfolio" className="py-20 bg-background">
-      <div className="container mx-auto px-4 lg:pl-24 lg:pr-12 text-muted-foreground">
+      <div className="container mx-auto px-4 lg:pl-16 lg:pr-4 text-muted-foreground">
         {/* 1. ART SECTION */}
         <div id="art" className="mb-20">
           <SectionHeader title="Art" subtitle="Digital art and illustrations" />
@@ -261,8 +232,8 @@ const PortfolioSection = () => {
           <SectionHeader title="Environments" subtitle="Environment art and world design" />
 
           {/* Environment Images Grid - 1 col mobile, 3 cols desktop */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {environmentsData.map(item => <div key={item.id} className="aspect-video rounded-lg overflow-hidden bg-muted border border-border/30 hover:border-primary/50 transition-all cursor-pointer hover:scale-[1.02]" onClick={() => setZoomedArtImage(item.image)}>
+          <div className="flex flex-col gap-6 max-w-5xl mx-auto">
+            {environmentsData.map(item => <div key={item.id} className="aspect-[16/10] w-full rounded-lg overflow-hidden bg-muted border border-border/30 hover:border-primary/50 transition-all cursor-pointer" onClick={() => setZoomedArtImage(item.image)}>
                 <img src={item.image} alt={`Environment ${item.id}`} className="w-full h-full object-cover" />
               </div>)}
           </div>
