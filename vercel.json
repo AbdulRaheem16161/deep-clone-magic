@@ -1,5 +1,5 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
+  "buildCommand": "bun run build",
+  "outputDirectory": ".output",
+  "framework": null
 }
