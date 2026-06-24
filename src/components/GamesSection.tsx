@@ -1,17 +1,9 @@
 import { useState } from 'react';
-import { ChevronDown, Download, Monitor, X } from 'lucide-react';
+import { ChevronDown, Download, Monitor, X, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerClose,
-} from '@/components/ui/drawer';
-import { Dialog, DialogContent, DialogClose } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogClose, DialogTitle } from '@/components/ui/dialog';
 
-// Cure & Infection screenshots (kept from previous build)
 import cureInfectionIcon from '@/assets/cure-infection-icon.png';
 import cureInfection1 from '@/assets/cure-infection-screenshot-1.png';
 import cureInfection2 from '@/assets/cure-infection-screenshot-2.png';
@@ -40,6 +32,8 @@ import doom6 from '@/assets/doom/doom-6.png.asset.json';
 import doom7 from '@/assets/doom/doom-7.png.asset.json';
 import doom8 from '@/assets/doom/doom-8.png.asset.json';
 import doom9 from '@/assets/doom/doom-9.png.asset.json';
+import softecBadge from '@/assets/community/softec-badge.png.asset.json';
+import ituAward from '@/assets/community/itu-award.jpg.asset.json';
 import { videos } from '@/lib/videos';
 
 type Game = {
@@ -47,13 +41,20 @@ type Game = {
   title: string;
   tagline?: string;
   icon?: string;
-  iconFallback: string; // initial letter fallback
+  iconFallback: string;
   downloadUrl?: string;
   inProgress?: boolean;
   videos: { label: string; youtubeId: string }[];
   screenshots?: string[];
   comingSoon?: boolean;
+  badge?: 'softec';
 };
+
+const DOOM_URL = 'https://www.dropbox.com/scl/fo/muklwundpnao488xn8bg0/AD4bzluFXTAfYuk2NrhNNKM?rlkey=hjen7qe2f3c7kim3fugfxv3wp&st=gi8sm0k0&dl=1';
+const CURE_URL = 'https://www.dropbox.com/scl/fi/hjqcebohvn8fs5zgs33q8/CureAndInfection_v1.0_Windows.zip?rlkey=xzmiil7o6lhdfhkvmay4l4651&st=gu40xdyu&dl=1';
+const YOMA_URL = 'https://www.dropbox.com/scl/fo/yeaslvx80m8mzx0acukus/AH3KmU_58vF6BLBpqUe6DKw?rlkey=fp72oi312yvvpzmnhh7d46d47&st=lp7b5k16&dl=1';
+const GUMPER_URL = 'https://www.dropbox.com/scl/fi/4klwj7gp5vz4tkt6ahthy/Gumper-Bumper-World.zip?rlkey=q788jf174r1tao2hmw88un3tz&st=esv4ckjv&dl=1';
+const AMONGUS_URL = 'https://www.dropbox.com/scl/fi/0lgbf0yqkgta45vk613w9/FindTheImpostor_v1.0_Windows.zip?rlkey=s8wbjoneq60ovvjg8uqlx186i&st=vc4adz7t&dl=1';
 
 const games: Game[] = [
   {
@@ -62,7 +63,7 @@ const games: Game[] = [
     tagline: 'Classic FPS — reimagined',
     icon: doomIcon,
     iconFallback: 'D',
-    downloadUrl: '#',
+    downloadUrl: DOOM_URL,
     videos: [
       { label: 'Gameplay', youtubeId: 'pggCjcIgk7k' },
       { label: 'Devlog 1', youtubeId: '_i2OdAMMVDM' },
@@ -76,16 +77,9 @@ const games: Game[] = [
     tagline: 'Survival shooting',
     icon: cureInfectionIcon,
     iconFallback: 'C',
-    downloadUrl: 'https://goncal0.itch.io/cure-and-infection',
+    downloadUrl: CURE_URL,
     videos: [],
-    screenshots: [
-      cureInfection1,
-      cureInfection2,
-      cureInfection3,
-      cureInfection4,
-      cureInfection5,
-      cureInfection6,
-    ],
+    screenshots: [cureInfection1, cureInfection2, cureInfection3, cureInfection4, cureInfection5, cureInfection6],
   },
   {
     id: 'yoma',
@@ -93,20 +87,9 @@ const games: Game[] = [
     tagline: 'Horror Escape — Story Based',
     icon: yomaIcon,
     iconFallback: 'Y',
-    downloadUrl: '#',
-    comingSoon: true,
+    downloadUrl: YOMA_URL,
     videos: [],
-    screenshots: [
-      yomaCover.url,
-      yoma1.url,
-      yoma2.url,
-      yoma3.url,
-      yoma4.url,
-      yoma5.url,
-      yoma6.url,
-      yoma7.url,
-      yoma8.url,
-    ],
+    screenshots: [yomaCover.url, yoma1.url, yoma2.url, yoma3.url, yoma4.url, yoma5.url, yoma6.url, yoma7.url, yoma8.url],
   },
   {
     id: 'gumper',
@@ -114,7 +97,8 @@ const games: Game[] = [
     tagline: 'Bumper-cart chaos',
     icon: gumperIcon,
     iconFallback: 'G',
-    downloadUrl: '#',
+    downloadUrl: GUMPER_URL,
+    badge: 'softec',
     videos: [
       { label: 'Gameplay', youtubeId: 'e059N0rVpPM' },
       { label: 'Devlog', youtubeId: 'e2TcC0cSglE' },
@@ -126,7 +110,7 @@ const games: Game[] = [
     tagline: 'Social deduction, 3D',
     icon: amongusIcon,
     iconFallback: 'A',
-    downloadUrl: '#',
+    downloadUrl: AMONGUS_URL,
     videos: [
       { label: 'Gameplay', youtubeId: 'S9udobAwd8A' },
       { label: 'Devlog', youtubeId: 'S0t_FS6bSyw' },
@@ -157,9 +141,7 @@ const GameIcon = ({ game }: { game: Game }) => (
     {game.icon ? (
       <img src={game.icon} alt={`${game.title} icon`} className="w-full h-full object-cover" />
     ) : (
-      <span className="font-orbitron font-bold text-xl text-primary">
-        {game.iconFallback}
-      </span>
+      <span className="font-orbitron font-bold text-xl text-primary">{game.iconFallback}</span>
     )}
   </div>
 );
@@ -176,145 +158,185 @@ const YouTubeEmbed = ({ id, title }: { id: string; title: string }) => (
   </div>
 );
 
+const SoftecBadgeDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) => (
+  <Dialog open={open} onOpenChange={onOpenChange}>
+    <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-background">
+      <DialogTitle className="sr-only">SOFTEC Game Jam — 2nd Position</DialogTitle>
+      <div className="flex flex-col items-center text-center space-y-6 py-2">
+        <img src={softecBadge.url} alt="SOFTEC Game Jam 2nd Position" className="w-44 h-44 md:w-56 md:h-56 object-contain" />
+
+        <p className="text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed">
+          SOFTEC is Pakistan's largest student-led technology event, organized annually by the students of FAST National
+          University of Computer and Emerging Sciences. Bringing together thousands of participants from across the country, it
+          features competitions, exhibitions, workshops, and industry networking opportunities that celebrate innovation and
+          technical excellence.
+        </p>
+
+        <p className="text-2xl md:text-3xl font-orbitron font-bold text-orange leading-snug max-w-2xl">
+          Our team secured 2nd place in the SOFTEC 2026 Game Jam.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full pt-2">
+          <div className="rounded-xl overflow-hidden border border-border/40 bg-black">
+            <iframe
+              src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7451837718075949056"
+              height="600"
+              width="100%"
+              frameBorder="0"
+              allowFullScreen
+              title="SOFTEC LinkedIn post"
+              className="w-full"
+            />
+          </div>
+          <div className="rounded-xl overflow-hidden border border-border/40 bg-muted">
+            <img src={ituAward.url} alt="ITU Congratulations — AbdulRaheem Runner-Up" className="w-full h-full object-contain" />
+          </div>
+        </div>
+      </div>
+    </DialogContent>
+  </Dialog>
+);
+
 const GameRow = ({ game }: { game: Game }) => {
   const [open, setOpen] = useState(false);
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+  const [badgeOpen, setBadgeOpen] = useState(false);
   const hasMedia = game.videos.length > 0 || (game.screenshots && game.screenshots.length > 0);
 
   return (
-    <Card
-      onClick={() => hasMedia && setOpen(true)}
-      className={`overflow-hidden border-border/50 bg-card/60 backdrop-blur-sm card-interactive ${hasMedia ? 'cursor-pointer' : ''}`}
-    >
-      <CardContent className="p-4 md:p-5">
-        <div className="flex items-center gap-4">
-          <GameIcon game={game} />
+    <>
+      <Card
+        onClick={() => hasMedia && setOpen(true)}
+        className={`overflow-hidden border-border/50 bg-card/60 backdrop-blur-sm card-interactive relative ${hasMedia ? 'cursor-pointer' : ''}`}
+      >
+        <CardContent className="p-4 md:p-5">
+          <div className="flex items-center gap-4">
+            <GameIcon game={game} />
 
-          <div className="flex-1 min-w-0">
-            <h3 className="font-orbitron font-bold text-lg md:text-xl text-foreground truncate">
-              {game.title}
-            </h3>
-            {game.tagline && (
-              <p className="text-sm text-muted-foreground truncate">{game.tagline}</p>
-            )}
-          </div>
-
-          <div className="flex items-center gap-2">
-            {game.downloadUrl && !game.inProgress && (
-              <Button
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(game.downloadUrl, '_blank');
-                }}
-                disabled={game.comingSoon}
-                className="gap-2 bg-foreground hover:bg-foreground/90 text-background"
-              >
-                <Download className="h-4 w-4" />
-                <span className="hidden sm:inline">Download</span>
-                <Monitor className="h-4 w-4" />
-              </Button>
-            )}
-            {game.inProgress && (
-              <span className="text-xs font-medium px-3 py-1 rounded-full bg-primary/15 text-primary border border-primary/30 hidden sm:inline">
-                In Progress
-              </span>
-            )}
-
-            {hasMedia && (
-              <ChevronDown className="h-5 w-5 text-primary flex-shrink-0" aria-hidden />
-            )}
-          </div>
-        </div>
-
-        {/* Drawer with media */}
-        <Drawer open={open} onOpenChange={setOpen}>
-          <DrawerContent className="max-h-[85vh]">
-            <DrawerHeader className="flex items-center justify-between">
-              <DrawerTitle className="font-orbitron text-xl md:text-2xl">
-                {game.title}
-              </DrawerTitle>
-              <DrawerClose asChild>
-                <Button size="icon" variant="ghost" aria-label="Close">
-                  <X className="h-5 w-5" />
-                </Button>
-              </DrawerClose>
-            </DrawerHeader>
-
-            <div className="overflow-y-auto px-4 md:px-8 pb-8 space-y-8">
-              {game.videos.length > 0 && (
-                <div className="space-y-4">
-                  <h4 className="font-orbitron font-semibold text-foreground">Videos</h4>
-                  <div className="grid gap-4 md:grid-cols-2">
-                    {game.videos.map((v) => (
-                      <div key={v.youtubeId} className="space-y-2">
-                        <p className="text-sm text-muted-foreground">{v.label}</p>
-                        <YouTubeEmbed id={v.youtubeId} title={`${game.title} — ${v.label}`} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {game.screenshots && game.screenshots.length > 0 && (
-                <div className="space-y-4">
-                  <h4 className="font-orbitron font-semibold text-foreground">Screenshots</h4>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    {game.screenshots.map((src, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setZoomedImage(src)}
-                        className="aspect-video rounded-lg overflow-hidden border border-border/40 hover:border-primary transition-all"
-                      >
-                        <img
-                          src={src}
-                          alt={`${game.title} screenshot ${i + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+            <div className="flex-1 min-w-0">
+              <h3 className="font-orbitron font-bold text-lg md:text-xl text-foreground truncate">{game.title}</h3>
+              {game.tagline && <p className="text-sm text-muted-foreground truncate">{game.tagline}</p>}
             </div>
-          </DrawerContent>
-        </Drawer>
 
-        {/* Zoomed screenshot */}
-        <Dialog open={!!zoomedImage} onOpenChange={() => setZoomedImage(null)}>
-          <DialogContent className="max-w-[95vw] max-h-[95vh] p-0 bg-black/95">
-            <DialogClose className="absolute right-4 top-4 z-10">
-              <X className="h-6 w-6 text-white" />
-            </DialogClose>
-            {zoomedImage && (
-              <img
-                src={zoomedImage}
-                alt="Zoomed screenshot"
-                className="w-full h-full object-contain"
-              />
+            <div className="flex items-center gap-2">
+              {game.badge === 'softec' && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setBadgeOpen(true);
+                  }}
+                  className="hidden sm:flex items-center justify-center w-12 h-12 rounded-full overflow-hidden border-2 border-orange/60 hover:scale-110 transition-transform shadow-md"
+                  title="SOFTEC Game Jam — 2nd Position"
+                  aria-label="View SOFTEC award"
+                >
+                  <img src={softecBadge.url} alt="SOFTEC 2nd" className="w-full h-full object-cover" />
+                </button>
+              )}
+              {game.downloadUrl && !game.inProgress && (
+                <Button
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(game.downloadUrl, '_blank');
+                  }}
+                  disabled={game.comingSoon}
+                  className="gap-2 bg-foreground hover:bg-foreground/90 text-background"
+                >
+                  <Download className="h-4 w-4" />
+                  <span className="hidden sm:inline">Download</span>
+                  <Monitor className="h-4 w-4" />
+                </Button>
+              )}
+              {game.inProgress && (
+                <span className="text-xs font-medium px-3 py-1 rounded-full bg-primary/15 text-primary border border-primary/30 hidden sm:inline">
+                  In Progress
+                </span>
+              )}
+
+              {hasMedia && <ChevronDown className="h-5 w-5 text-primary flex-shrink-0" aria-hidden />}
+            </div>
+          </div>
+
+          {/* Mobile badge below header */}
+          {game.badge === 'softec' && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setBadgeOpen(true);
+              }}
+              className="sm:hidden mt-3 flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full bg-orange/10 text-orange border border-orange/30"
+            >
+              <Trophy className="h-3.5 w-3.5" />
+              SOFTEC 2nd Position
+            </button>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Media dialog (replaced Drawer for reliable close) */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto bg-background">
+          <DialogTitle className="font-orbitron text-xl md:text-2xl">{game.title}</DialogTitle>
+          <div className="space-y-8 pt-2">
+            {game.videos.length > 0 && (
+              <div className="space-y-4">
+                <h4 className="font-orbitron font-semibold text-foreground">Videos</h4>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {game.videos.map((v) => (
+                    <div key={v.youtubeId} className="space-y-2">
+                      <p className="text-sm text-muted-foreground">{v.label}</p>
+                      <YouTubeEmbed id={v.youtubeId} title={`${game.title} — ${v.label}`} />
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
-          </DialogContent>
-        </Dialog>
-      </CardContent>
-    </Card>
+
+            {game.screenshots && game.screenshots.length > 0 && (
+              <div className="space-y-4">
+                <h4 className="font-orbitron font-semibold text-foreground">Screenshots</h4>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {game.screenshots.map((src, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setZoomedImage(src)}
+                      className="aspect-video rounded-lg overflow-hidden border border-border/40 hover:border-primary transition-all"
+                    >
+                      <img src={src} alt={`${game.title} screenshot ${i + 1}`} className="w-full h-full object-cover" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Zoomed screenshot */}
+      <Dialog open={!!zoomedImage} onOpenChange={() => setZoomedImage(null)}>
+        <DialogContent className="max-w-[95vw] max-h-[95vh] p-0 bg-black/95">
+          <DialogTitle className="sr-only">Screenshot</DialogTitle>
+          <DialogClose className="absolute right-4 top-4 z-10">
+            <X className="h-6 w-6 text-white" />
+          </DialogClose>
+          {zoomedImage && <img src={zoomedImage} alt="Zoomed screenshot" className="w-full h-full object-contain" />}
+        </DialogContent>
+      </Dialog>
+
+      {game.badge === 'softec' && <SoftecBadgeDialog open={badgeOpen} onOpenChange={setBadgeOpen} />}
+    </>
   );
 };
 
 const GamesSection = () => {
   return (
     <section id="games" className="py-20 bg-background">
-      <div className="container mx-auto px-4 lg:pl-16 lg:pr-4">
-        {/* Section Header */}
+      <div className="container mx-auto px-4 lg:pl-20 lg:pr-8">
         <div className="mb-8">
-          <h3 className="text-3xl md:text-4xl font-orbitron font-bold text-foreground">
-            Games
-          </h3>
-          <p className="text-muted-foreground mt-2">
-            Our growing roster of indie titles
-          </p>
+          <h3 className="text-3xl md:text-4xl font-orbitron font-bold text-foreground">Games</h3>
+          <p className="text-muted-foreground mt-2">Our growing roster of indie titles</p>
         </div>
 
-        {/* Header video — autoplay loop, no audio. High priority load. */}
         <video
           src={videos.gamesHeader}
           autoPlay
@@ -327,7 +349,6 @@ const GamesSection = () => {
           className="mb-12 w-full rounded-2xl border border-border/40 shadow-xl"
         />
 
-        {/* Game Cards */}
         <div className="space-y-4">
           {games.map((game) => (
             <GameRow key={game.id} game={game} />
