@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import GamesSection from "@/components/GamesSection";
 import ComicsTrailersSection from "@/components/ComicsTrailersSection";
-import LearnGameDev from "@/components/LearnGameDev";
 import PortfolioSection from "@/components/PortfolioSection";
 import ServicesSection from "@/components/ServicesSection";
 import MeetTheTeam from "@/components/MeetTheTeam";
@@ -44,7 +43,6 @@ function Index() {
         <ComicsTrailersSection />
         <PortfolioSection />
         <ServicesSection />
-        <LearnGameDev />
         <MeetTheTeam />
         <About />
         <Contact />
