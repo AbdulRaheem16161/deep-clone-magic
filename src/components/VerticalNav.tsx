@@ -1,4 +1,4 @@
-import { Gamepad2, Film, Palette, TreePine, Box } from 'lucide-react';
+import { Gamepad2, Film, Palette, TreePine, Box, GraduationCap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Tooltip,
@@ -13,6 +13,7 @@ const navItems = [
   { label: 'Art', icon: Palette, target: 'art' },
   { label: 'Environments', icon: TreePine, target: 'environments' },
   { label: '3D Models', icon: Box, target: '3d-models' },
+  { label: 'Learn Game Dev', icon: GraduationCap, target: 'learn' },
 ];
 
 const VerticalNav = () => {

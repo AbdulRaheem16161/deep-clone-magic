@@ -205,7 +205,7 @@ const PortfolioSection = () => {
   const [zoomedArtImage, setZoomedArtImage] = useState<string | null>(null);
   const [fullscreenVideo, setFullscreenVideo] = useState<string | null>(null);
   return <section id="portfolio" className="py-20 bg-background">
-      <div className="container mx-auto px-4 lg:pl-16 lg:pr-4 text-muted-foreground">
+      <div className="container mx-auto px-4 lg:pl-20 lg:pr-8 text-muted-foreground">
         {/* 1. ART SECTION */}
         <div id="art" className="mb-20">
           <SectionHeader title="Art" subtitle="Digital art and illustrations" />
@@ -232,7 +232,7 @@ const PortfolioSection = () => {
           <SectionHeader title="Environments" subtitle="Environment art and world design" />
 
           {/* Environment Images Grid - 1 col mobile, 3 cols desktop */}
-          <div className="flex flex-col gap-6 max-w-5xl mx-auto">
+          <div className="flex flex-col gap-6 w-full">
             {environmentsData.map(item => <div key={item.id} className="aspect-[16/10] w-full rounded-lg overflow-hidden bg-muted border border-border/30 hover:border-primary/50 transition-all cursor-pointer" onClick={() => setZoomedArtImage(item.image)}>
                 <img src={item.image} alt={`Environment ${item.id}`} className="w-full h-full object-cover" />
               </div>)}
