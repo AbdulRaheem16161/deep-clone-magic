@@ -172,17 +172,150 @@ const GameIcon = ({ game }: { game: Game }) => (
   </div>
 );
 
-const YouTubeEmbed = ({ id, title }: { id: string; title: string }) => (
-  <div className="aspect-video w-full rounded-lg overflow-hidden bg-black border border-border/40">
-    <iframe
-      src={`https://www.youtube.com/embed/${id}`}
-      title={title}
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-      className="w-full h-full"
-    />
-  </div>
-);
+const YouTubeEmbed = ({ id, title }: { id: string; title: string }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<any>(null);
+  const pollRef = useRef<number | null>(null);
+  const [state, setState] = useState<'idle' | 'buffering' | 'playing'>('idle');
+  const [progress, setProgress] = useState(0);
+  const [fakeProgress, setFakeProgress] = useState(8);
+
+  // animate a "fake" progress while waiting for first buffer signal so the UI feels alive
+  useEffect(() => {
+    if (state === 'playing') return;
+    const i = window.setInterval(() => {
+      setFakeProgress((p) => {
+        const target = Math.max(p, progress * 100);
+        // ease toward 92 while buffering, never reach 100 until playing
+        const next = p + Math.max(0.4, (92 - p) * 0.04);
+        return Math.min(92, Math.max(next, target));
+      });
+    }, 120);
+    return () => clearInterval(i);
+  }, [state, progress]);
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadApi = () =>
+      new Promise<any>((resolve) => {
+        const w = window as any;
+        if (w.YT && w.YT.Player) return resolve(w.YT);
+        const prev = w.onYouTubeIframeAPIReady;
+        w.onYouTubeIframeAPIReady = () => {
+          prev?.();
+          resolve(w.YT);
+        };
+        if (!document.querySelector('script[data-yt-api]')) {
+          const s = document.createElement('script');
+          s.src = 'https://www.youtube.com/iframe_api';
+          s.async = true;
+          s.dataset.ytApi = '1';
+          document.head.appendChild(s);
+        }
+      });
+
+    loadApi().then((YT) => {
+      if (cancelled || !containerRef.current) return;
+      playerRef.current = new YT.Player(containerRef.current, {
+        videoId: id,
+        playerVars: { rel: 0, modestbranding: 1, playsinline: 1 },
+        events: {
+          onStateChange: (e: any) => {
+            // -1 unstarted, 0 ended, 1 playing, 2 paused, 3 buffering, 5 cued
+            if (e.data === 1) setState('playing');
+            else if (e.data === 3) setState('buffering');
+            else if (e.data === 5 || e.data === -1) setState('idle');
+          },
+        },
+      });
+    });
+
+    pollRef.current = window.setInterval(() => {
+      const p = playerRef.current;
+      if (p && typeof p.getVideoLoadedFraction === 'function') {
+        try { setProgress(p.getVideoLoadedFraction() || 0); } catch { /* noop */ }
+      }
+    }, 250);
+
+    return () => {
+      cancelled = true;
+      if (pollRef.current) clearInterval(pollRef.current);
+      try { playerRef.current?.destroy?.(); } catch { /* noop */ }
+    };
+  }, [id]);
+
+  const showOverlay = state !== 'playing';
+  const shownPct = Math.round(state === 'playing' ? 100 : fakeProgress);
+
+  return (
+    <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-black border border-border/40">
+      {/* blurred thumbnail backdrop */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-500 ${showOverlay ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        style={{
+          backgroundImage: `url(https://i.ytimg.com/vi/${id}/hqdefault.jpg)`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(18px) brightness(0.55) saturate(1.1)',
+          transform: 'scale(1.15)',
+        }}
+        aria-hidden
+      />
+      {/* shimmer sweep */}
+      <div
+        className={`absolute inset-0 pointer-events-none transition-opacity duration-500 ${showOverlay ? 'opacity-100' : 'opacity-0'}`}
+        aria-hidden
+        style={{
+          background:
+            'linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.08) 50%, transparent 70%)',
+          backgroundSize: '200% 100%',
+          animation: 'yt-shimmer 2.4s linear infinite',
+        }}
+      />
+
+      <div ref={containerRef} className="absolute inset-0 w-full h-full" />
+
+      {/* overlay UI */}
+      <div
+        className={`absolute inset-0 flex flex-col items-center justify-center gap-4 transition-opacity duration-500 ${showOverlay ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        aria-hidden={!showOverlay}
+      >
+        <div className="relative w-20 h-20">
+          <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="44" stroke="rgba(255,255,255,0.15)" strokeWidth="6" fill="none" />
+            <circle
+              cx="50"
+              cy="50"
+              r="44"
+              stroke="hsl(var(--primary))"
+              strokeWidth="6"
+              fill="none"
+              strokeLinecap="round"
+              strokeDasharray={2 * Math.PI * 44}
+              strokeDashoffset={2 * Math.PI * 44 * (1 - shownPct / 100)}
+              style={{ transition: 'stroke-dashoffset 200ms linear', filter: 'drop-shadow(0 0 6px hsl(var(--primary) / 0.6))' }}
+            />
+          </svg>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="font-orbitron text-sm font-bold text-white tabular-nums">{shownPct}%</span>
+          </div>
+        </div>
+        <div className="text-[11px] uppercase tracking-[0.25em] text-white/70 font-medium">
+          {state === 'buffering' ? 'Buffering' : 'Loading'}
+        </div>
+        {/* YouTube-style red bar */}
+        <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/10 overflow-hidden">
+          <div
+            className="h-full bg-[#ff0033] transition-[width] duration-200 ease-linear"
+            style={{ width: `${shownPct}%`, boxShadow: '0 0 8px #ff0033' }}
+          />
+        </div>
+      </div>
+
+      <style>{`@keyframes yt-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }`}</style>
+    </div>
+  );
+};
 
 const SoftecBadgeDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) => (
   <Dialog open={open} onOpenChange={onOpenChange}>
