@@ -28,9 +28,13 @@ import portrait11 from '@/assets/portrait-11.jpg';
 import portrait12 from '@/assets/portrait-12.jpg';
 
 // Import environments (new uploads)
-import envNew1 from '@/assets/env-new/env-1.png.asset.json';
-import envNew2 from '@/assets/env-new/env-2.png.asset.json';
-import envNew3 from '@/assets/env-new/env-3.png.asset.json';
+import envNew1Asset from '@/assets/env-new/env-1.png.asset.json';
+import envNew2Asset from '@/assets/env-new/env-2.png.asset.json';
+import envNew3Asset from '@/assets/env-new/env-3.png.asset.json';
+import { assetUrl } from '@/lib/asset-url';
+const envNew1 = { url: assetUrl(envNew1Asset.url) };
+const envNew2 = { url: assetUrl(envNew2Asset.url) };
+const envNew3 = { url: assetUrl(envNew3Asset.url) };
 
 // 3D Models data
 import model3DPlaceholder from '@/assets/3d-model-placeholder.png';
