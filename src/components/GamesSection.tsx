@@ -85,6 +85,7 @@ const games: Game[] = [
     downloadUrl: DOOM_URL,
     videos: [
       { label: 'Gameplay', youtubeId: 'pggCjcIgk7k' },
+      { label: 'Gameplay 2', youtubeId: 'i-jQMD8Vezk' },
       { label: 'Devlog 1', youtubeId: '_i2OdAMMVDM' },
       { label: 'Devlog 2', youtubeId: 'VAdKUHrQ3MY' },
     ],
@@ -97,7 +98,11 @@ const games: Game[] = [
     icon: cureInfectionIcon,
     iconFallback: 'C',
     downloadUrl: CURE_URL,
-    videos: [],
+    videos: [
+      { label: 'Full Length Gameplay', youtubeId: 'Xmvg2rPg59Q' },
+      { label: 'Highlights', youtubeId: 'BRfepakrNBo' },
+      { label: 'Trailer', youtubeId: 'ZfL6SylckRg' },
+    ],
     screenshots: [cureInfection1, cureInfection2, cureInfection3, cureInfection4, cureInfection5, cureInfection6],
   },
   {
@@ -107,7 +112,9 @@ const games: Game[] = [
     icon: yomaIcon,
     iconFallback: 'Y',
     downloadUrl: YOMA_URL,
-    videos: [],
+    videos: [
+      { label: 'Gameplay', youtubeId: 'dkD2cCXrAG0' },
+    ],
     screenshots: [yomaCover.url, yoma1.url, yoma2.url, yoma3.url, yoma4.url, yoma5.url, yoma6.url, yoma7.url, yoma8.url],
   },
   {
