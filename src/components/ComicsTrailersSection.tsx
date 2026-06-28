@@ -1,4 +1,5 @@
 import { videos } from '@/lib/videos';
+import HeaderVideo from '@/components/HeaderVideo';
 
 const ComicsTrailersSection = () => {
   return (
@@ -13,15 +14,7 @@ const ComicsTrailersSection = () => {
           </p>
         </div>
 
-        <video
-          src={videos.trailersHeader}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="w-full rounded-2xl border border-border/40 shadow-xl"
-        />
+        <HeaderVideo src={videos.trailersHeader} />
       </div>
     </section>
   );
