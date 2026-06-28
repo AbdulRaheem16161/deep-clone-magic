@@ -1,5 +1,4 @@
-import { ArrowRight, ShoppingCart, Users } from 'lucide-react';
-import { Link } from '@tanstack/react-router';
+import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import heroCharacter from '@/assets/hero-character-new.png';
 
@@ -44,17 +43,6 @@ const Hero = () => {
               >
                 <ShoppingCart className="h-5 w-5" />
                 Hire Us
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="text-lg px-8 py-7 border-orange text-orange hover:bg-orange hover:text-white gap-2 transition-all duration-300 hover:scale-[1.02]"
-                size="lg"
-              >
-                <Link to="/community">
-                  <Users className="h-5 w-5" />
-                  Join Community
-                </Link>
               </Button>
             </div>
           </div>

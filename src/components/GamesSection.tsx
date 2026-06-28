@@ -365,17 +365,7 @@ const GamesSection = () => {
           <p className="text-muted-foreground mt-2">Our growing roster of indie titles</p>
         </div>
 
-        <video
-          src={videos.gamesHeader}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          // @ts-expect-error fetchpriority is a valid HTML attribute
-          fetchpriority="high"
-          className="mb-12 w-full rounded-2xl border border-border/40 shadow-xl"
-        />
+        <HeaderVideo src={videos.gamesHeader} priority className="mb-12" />
 
         <div className="space-y-4">
           {games.map((game) => (
