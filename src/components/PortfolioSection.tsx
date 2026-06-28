@@ -4,6 +4,7 @@ import { X, Loader2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogClose } from '@/components/ui/dialog';
 import { CharacterDesignsGrid } from '@/components/CharacterDesignsGrid';
 import { DigitalPortraitsGrid } from '@/components/DigitalPortraitsGrid';
+import HeaderVideo from '@/components/HeaderVideo';
 
 // Import character designs
 import characterDesign1 from '@/assets/character-design-1.jpg';
