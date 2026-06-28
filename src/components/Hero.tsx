@@ -42,7 +42,7 @@ const Hero = () => {
                 onClick={() => scrollToSection('services')}
               >
                 <ShoppingCart className="h-5 w-5" />
-                Hire Us
+                Work With Us
               </Button>
             </div>
           </div>
