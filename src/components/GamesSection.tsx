@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { ChevronDown, Download, Monitor, X, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogClose, DialogTitle } from '@/components/ui/dialog';
+import HeaderVideo from '@/components/HeaderVideo';
 
 import cureInfectionIcon from '@/assets/cure-infection-icon.png';
 import cureInfection1 from '@/assets/cure-infection-screenshot-1.png';
