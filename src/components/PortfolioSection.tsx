@@ -13,15 +13,6 @@ import characterDesign3 from '@/assets/character-design-3.jpg';
 import characterDesign4 from '@/assets/character-design-4.jpg';
 import characterDesign5 from '@/assets/character-design-5.jpg';
 import characterDesign6 from '@/assets/character-design-6.jpg';
-import characterNew1Asset from '@/assets/character-new/c1.png.asset.json';
-import characterNew2Asset from '@/assets/character-new/c2.png.asset.json';
-import characterNew3Asset from '@/assets/character-new/c3.png.asset.json';
-import portraitNew1Asset from '@/assets/portraits-new/p1.png.asset.json';
-import portraitNew4Asset from '@/assets/portraits-new/p4.png.asset.json';
-import portraitNew9Asset from '@/assets/portraits-new/p9.png.asset.json';
-import iz1Asset from '@/assets/game-icons-art/iz1.png.asset.json';
-import iz2Asset from '@/assets/game-icons-art/iz2.png.asset.json';
-import iz3Asset from '@/assets/game-icons-art/iz3.png.asset.json';
 
 // Import portraits
 import portrait1 from '@/assets/portrait-1.png';
@@ -137,29 +128,8 @@ const artCategories = {
   }, {
     id: 12,
     image: portrait12
-  }, {
-    id: 13,
-    image: portraitNew1Asset.url
-  }, {
-    id: 14,
-    image: portraitNew4Asset.url
-  }, {
-    id: 15,
-    image: portraitNew9Asset.url
   }]
 };
-
-const gameIconsArt = [
-  { id: 1, image: iz1Asset.url },
-  { id: 2, image: iz2Asset.url },
-  { id: 3, image: iz3Asset.url },
-];
-
-const characterDesignRows = [
-  [characterDesign1, characterDesign2, characterDesign3],
-  [characterNew1Asset.url, characterNew2Asset.url, characterNew3Asset.url],
-  [characterDesign4, characterDesign5, characterDesign6],
-];
 
 // Environments data
 const environmentsData = [
@@ -250,23 +220,7 @@ const PortfolioSection = () => {
             <h4 className="text-lg md:text-xl font-orbitron font-semibold text-foreground mb-4">
               Character Designs
             </h4>
-            <div className="space-y-4">
-              {characterDesignRows.map((row, rowIdx) => (
-                <div key={rowIdx} className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {row.map((src, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      className="rounded-lg overflow-hidden bg-muted border border-border/30 hover:border-primary/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer aspect-square"
-                      onClick={() => setZoomedArtImage(src)}
-                      aria-label={`Open character design`}
-                    >
-                      <img src={src} alt="Character design" loading="lazy" className="w-full h-full object-cover" />
-                    </button>
-                  ))}
-                </div>
-              ))}
-            </div>
+            <CharacterDesignsGrid items={artCategories.characterDesigns} onImageClick={setZoomedArtImage} />
           </div>
 
           {/* Digital Portraits */}
@@ -275,26 +229,6 @@ const PortfolioSection = () => {
               Digital Portraits
             </h4>
             <DigitalPortraitsGrid items={artCategories.digitalPortraits} onImageClick={setZoomedArtImage} />
-          </div>
-
-          {/* Game Icons */}
-          <div className="mb-10">
-            <h4 className="text-lg md:text-xl font-orbitron font-semibold text-foreground mb-4">
-              Game Icons
-            </h4>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {gameIconsArt.map(item => (
-                <button
-                  key={item.id}
-                  type="button"
-                  className="aspect-square rounded-lg overflow-hidden bg-muted border border-border/30 hover:border-primary/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
-                  onClick={() => setZoomedArtImage(item.image)}
-                  aria-label="Open game icon"
-                >
-                  <img src={item.image} alt="Game icon" loading="lazy" className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
           </div>
         </div>
 

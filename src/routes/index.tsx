@@ -15,7 +15,7 @@ import VerticalNav from "@/components/VerticalNav";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DeepCut Originals | Games, Art & 3D" },
+      { title: "DeepCut Originals — Games, Art & 3D" },
       {
         name: "description",
         content:
