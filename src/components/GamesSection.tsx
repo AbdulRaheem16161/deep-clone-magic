@@ -80,7 +80,7 @@ const games: Game[] = [
   {
     id: 'doom',
     title: 'Doom',
-    tagline: 'Classic FPS — reimagined',
+    tagline: 'Classic FPS | Monsters Hunting',
     icon: doomIcon,
     iconFallback: 'D',
     downloadUrl: DOOM_URL,
@@ -109,7 +109,7 @@ const games: Game[] = [
   {
     id: 'yoma',
     title: 'YOMA',
-    tagline: 'Horror Escape — Story Based',
+    tagline: 'Horror Escape | Story Based',
     icon: yomaIcon,
     iconFallback: 'Y',
     downloadUrl: YOMA_URL,
@@ -189,7 +189,7 @@ const YouTubeEmbed = ({ id, title }: { id: string; title: string }) => (
 const SoftecBadgeDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) => (
   <Dialog open={open} onOpenChange={onOpenChange}>
     <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-background">
-      <DialogTitle className="sr-only">SOFTEC Game Jam — 2nd Position</DialogTitle>
+      <DialogTitle className="sr-only">SOFTEC Game Jam | 2nd Position</DialogTitle>
       <div className="flex flex-col items-center text-center space-y-6 py-2">
         <img src={softecBadge.url} alt="SOFTEC Game Jam 2nd Position" className="w-44 h-44 md:w-56 md:h-56 object-contain" />
 
@@ -217,7 +217,7 @@ const SoftecBadgeDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange
             />
           </div>
           <div className="rounded-xl overflow-hidden border border-border/40 bg-muted">
-            <img src={ituAward.url} alt="ITU Congratulations — AbdulRaheem Runner-Up" className="w-full h-full object-contain" />
+            <img src={ituAward.url} alt="ITU Congratulations | AbdulRaheem Runner-Up" className="w-full h-full object-contain" />
           </div>
         </div>
       </div>
@@ -254,7 +254,7 @@ const GameRow = ({ game }: { game: Game }) => {
                     setBadgeOpen(true);
                   }}
                   className="hidden sm:flex items-center justify-center w-12 h-12 rounded-full overflow-hidden border-2 border-orange/60 hover:scale-110 transition-transform shadow-md"
-                  title="SOFTEC Game Jam — 2nd Position"
+                  title="SOFTEC Game Jam | 2nd Position"
                   aria-label="View SOFTEC award"
                 >
                   <img src={softecBadge.url} alt="SOFTEC 2nd" className="w-full h-full object-cover" />
@@ -313,7 +313,7 @@ const GameRow = ({ game }: { game: Game }) => {
                   {game.videos.map((v) => (
                     <div key={v.youtubeId} className="space-y-2">
                       <p className="text-sm text-muted-foreground">{v.label}</p>
-                      <YouTubeEmbed id={v.youtubeId} title={`${game.title} — ${v.label}`} />
+                      <YouTubeEmbed id={v.youtubeId} title={`${game.title} | ${v.label}`} />
                     </div>
                   ))}
                 </div>
