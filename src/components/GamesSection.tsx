@@ -109,7 +109,7 @@ const games: Game[] = [
   {
     id: 'yoma',
     title: 'YOMA',
-    tagline: 'Horror Escape — Story Based',
+    tagline: 'Horror Escape | Story Based',
     icon: yomaIcon,
     iconFallback: 'Y',
     downloadUrl: YOMA_URL,
