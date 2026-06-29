@@ -13,6 +13,15 @@ import characterDesign3 from '@/assets/character-design-3.jpg';
 import characterDesign4 from '@/assets/character-design-4.jpg';
 import characterDesign5 from '@/assets/character-design-5.jpg';
 import characterDesign6 from '@/assets/character-design-6.jpg';
+import characterNew1Asset from '@/assets/character-new/c1.png.asset.json';
+import characterNew2Asset from '@/assets/character-new/c2.png.asset.json';
+import characterNew3Asset from '@/assets/character-new/c3.png.asset.json';
+import portraitNew1Asset from '@/assets/portraits-new/p1.png.asset.json';
+import portraitNew4Asset from '@/assets/portraits-new/p4.png.asset.json';
+import portraitNew9Asset from '@/assets/portraits-new/p9.png.asset.json';
+import iz1Asset from '@/assets/game-icons-art/iz1.png.asset.json';
+import iz2Asset from '@/assets/game-icons-art/iz2.png.asset.json';
+import iz3Asset from '@/assets/game-icons-art/iz3.png.asset.json';
 
 // Import portraits
 import portrait1 from '@/assets/portrait-1.png';
