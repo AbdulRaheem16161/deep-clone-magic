@@ -137,8 +137,29 @@ const artCategories = {
   }, {
     id: 12,
     image: portrait12
+  }, {
+    id: 13,
+    image: portraitNew1Asset.url
+  }, {
+    id: 14,
+    image: portraitNew4Asset.url
+  }, {
+    id: 15,
+    image: portraitNew9Asset.url
   }]
 };
+
+const gameIconsArt = [
+  { id: 1, image: iz1Asset.url },
+  { id: 2, image: iz2Asset.url },
+  { id: 3, image: iz3Asset.url },
+];
+
+const characterDesignRows = [
+  [characterDesign1, characterDesign2, characterDesign3],
+  [characterNew1Asset.url, characterNew2Asset.url, characterNew3Asset.url],
+  [characterDesign4, characterDesign5, characterDesign6],
+];
 
 // Environments data
 const environmentsData = [
