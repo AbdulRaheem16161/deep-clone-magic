@@ -250,7 +250,23 @@ const PortfolioSection = () => {
             <h4 className="text-lg md:text-xl font-orbitron font-semibold text-foreground mb-4">
               Character Designs
             </h4>
-            <CharacterDesignsGrid items={artCategories.characterDesigns} onImageClick={setZoomedArtImage} />
+            <div className="space-y-4">
+              {characterDesignRows.map((row, rowIdx) => (
+                <div key={rowIdx} className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {row.map((src, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      className="rounded-lg overflow-hidden bg-muted border border-border/30 hover:border-primary/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer aspect-square"
+                      onClick={() => setZoomedArtImage(src)}
+                      aria-label={`Open character design`}
+                    >
+                      <img src={src} alt="Character design" loading="lazy" className="w-full h-full object-cover" />
+                    </button>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Digital Portraits */}
@@ -259,6 +275,26 @@ const PortfolioSection = () => {
               Digital Portraits
             </h4>
             <DigitalPortraitsGrid items={artCategories.digitalPortraits} onImageClick={setZoomedArtImage} />
+          </div>
+
+          {/* Game Icons */}
+          <div className="mb-10">
+            <h4 className="text-lg md:text-xl font-orbitron font-semibold text-foreground mb-4">
+              Game Icons
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {gameIconsArt.map(item => (
+                <button
+                  key={item.id}
+                  type="button"
+                  className="aspect-square rounded-lg overflow-hidden bg-muted border border-border/30 hover:border-primary/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
+                  onClick={() => setZoomedArtImage(item.image)}
+                  aria-label="Open game icon"
+                >
+                  <img src={item.image} alt="Game icon" loading="lazy" className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
