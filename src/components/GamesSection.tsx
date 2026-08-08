@@ -70,12 +70,11 @@ type Game = {
   badge?: 'softec';
 };
 
-const DOOM_URL = 'https://www.dropbox.com/scl/fo/8zl5w2jskyfflzb6ydsff/AJUbYOaLnc4FPhhM18iQ_Mg?rlkey=2yswlahqgt6rb4eehsq9615tj&st=91bbjxry&dl=0';
-const CURE_URL = 'https://www.dropbox.com/scl/fo/iv9f6r9xvlyzjpqvotfky/AE0q5cgw0pwvRRixwTplsWg?rlkey=n40j37ba1y8yrii8uvvjzu5gy&st=jjp6cjav&dl=0';
-const YOMA_URL = 'https://www.dropbox.com/scl/fo/oa5ltyhtee8g73fw0p2xa/ALtnP8xIFsdG2-O1uwyw4gU?rlkey=7lf0dnk0bliwowkh1n831pu74&st=s4abhfz5&dl=0';
-const GUMPER_URL = 'https://www.dropbox.com/scl/fo/57h1uqd92v5hjaeyax5ce/AEJfaOQrGH0nm3B2atgwksQ?rlkey=3t7i9kcln7dnd6pekt5z4s2je&st=r5y1llfl&dl=0';
-const AMONGUS_URL = 'https://www.dropbox.com/scl/fo/dxqezegqtbcu2o5p7lvg9/AMvimBz9ng2o2dikeziuC5c?rlkey=f79hhftbgd8afk071pzxun8r3&st=efhhm4r9&dl=1';
-const CARHORDE_URL = 'https://drive.google.com/drive/folders/1kea4g1AuOgKC8n9S_vYkjMnqXMu10MEL?usp=sharing';
+const DOOM_URL = 'https://www.dropbox.com/scl/fo/muklwundpnao488xn8bg0/AD4bzluFXTAfYuk2NrhNNKM?rlkey=hjen7qe2f3c7kim3fugfxv3wp&st=gi8sm0k0&dl=1';
+const CURE_URL = 'https://www.dropbox.com/scl/fi/hjqcebohvn8fs5zgs33q8/CureAndInfection_v1.0_Windows.zip?rlkey=xzmiil7o6lhdfhkvmay4l4651&st=gu40xdyu&dl=1';
+const YOMA_URL = 'https://www.dropbox.com/scl/fo/yeaslvx80m8mzx0acukus/AH3KmU_58vF6BLBpqUe6DKw?rlkey=fp72oi312yvvpzmnhh7d46d47&st=lp7b5k16&dl=1';
+const GUMPER_URL = 'https://www.dropbox.com/scl/fi/4klwj7gp5vz4tkt6ahthy/Gumper-Bumper-World.zip?rlkey=q788jf174r1tao2hmw88un3tz&st=esv4ckjv&dl=1';
+const AMONGUS_URL = 'https://www.dropbox.com/scl/fi/0lgbf0yqkgta45vk613w9/FindTheImpostor_v1.0_Windows.zip?rlkey=s8wbjoneq60ovvjg8uqlx186i&st=vc4adz7t&dl=1';
 
 const games: Game[] = [
   {
@@ -159,12 +158,8 @@ const games: Game[] = [
     tagline: 'Development in progress',
     icon: carhordeIcon.url,
     iconFallback: 'C',
-    downloadUrl: CARHORDE_URL,
     inProgress: true,
-    videos: [
-      { label: 'Devlog', youtubeId: 'FY7GR2Z-Pgs' },
-      { label: 'Gameplay 2', youtubeId: 'JeqE6yjx8hA' },
-    ],
+    videos: [{ label: 'Devlog', youtubeId: 'FY7GR2Z-Pgs' }],
   },
 ];
 
@@ -265,7 +260,7 @@ const GameRow = ({ game }: { game: Game }) => {
                   <img src={softecBadge.url} alt="SOFTEC 2nd" className="w-full h-full object-cover" />
                 </button>
               )}
-              {game.downloadUrl && (
+              {game.downloadUrl && !game.inProgress && (
                 <Button
                   size="sm"
                   onClick={(e) => {
