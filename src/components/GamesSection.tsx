@@ -265,7 +265,7 @@ const GameRow = ({ game }: { game: Game }) => {
                   <img src={softecBadge.url} alt="SOFTEC 2nd" className="w-full h-full object-cover" />
                 </button>
               )}
-              {game.downloadUrl && !game.inProgress && (
+              {game.downloadUrl && (
                 <Button
                   size="sm"
                   onClick={(e) => {
