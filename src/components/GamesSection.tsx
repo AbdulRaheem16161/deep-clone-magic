@@ -159,8 +159,12 @@ const games: Game[] = [
     tagline: 'Development in progress',
     icon: carhordeIcon.url,
     iconFallback: 'C',
+    downloadUrl: CARHORDE_URL,
     inProgress: true,
-    videos: [{ label: 'Devlog', youtubeId: 'FY7GR2Z-Pgs' }],
+    videos: [
+      { label: 'Devlog', youtubeId: 'FY7GR2Z-Pgs' },
+      { label: 'Gameplay', youtubeId: 'JeqE6yjx8hA' },
+    ],
   },
 ];
 
