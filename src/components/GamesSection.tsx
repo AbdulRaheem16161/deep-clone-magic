@@ -239,7 +239,11 @@ const GameRow = ({ game }: { game: Game }) => {
   return (
     <>
       <Card
-        onClick={() => hasMedia && setOpen(true)}
+        onClick={(e) => {
+          // Never interfere with external links (downloads) or other buttons
+          if ((e.target as HTMLElement).closest('a, button')) return;
+          if (hasMedia) setOpen(true);
+        }}
         className={`overflow-hidden border-border/50 bg-card/60 backdrop-blur-sm card-interactive relative ${hasMedia ? 'cursor-pointer' : ''}`}
       >
         <CardContent className="p-4 md:p-5">
