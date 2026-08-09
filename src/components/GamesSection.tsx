@@ -267,17 +267,20 @@ const GameRow = ({ game }: { game: Game }) => {
               )}
               {game.downloadUrl && (
                 <Button
+                  asChild
                   size="sm"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.open(game.downloadUrl, '_blank');
-                  }}
-                  disabled={game.comingSoon}
                   className="gap-2 bg-foreground hover:bg-foreground/90 text-background"
                 >
-                  <Download className="h-4 w-4" />
-                  <span className="hidden sm:inline">Download</span>
-                  <Monitor className="h-4 w-4" />
+                  <a
+                    href={game.downloadUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Download className="h-4 w-4" />
+                    <span className="hidden sm:inline">Download</span>
+                    <Monitor className="h-4 w-4" />
+                  </a>
                 </Button>
               )}
               {game.inProgress && (
