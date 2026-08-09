@@ -275,12 +275,7 @@ const GameRow = ({ game }: { game: Game }) => {
                   size="sm"
                   className="gap-2 bg-foreground hover:bg-foreground/90 text-background"
                 >
-                  <a
-                    href={game.downloadUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                  >
+                  <a href={game.downloadUrl} target="_blank" rel="noopener noreferrer">
                     <Download className="h-4 w-4" />
                     <span className="hidden sm:inline">Download</span>
                     <Monitor className="h-4 w-4" />
