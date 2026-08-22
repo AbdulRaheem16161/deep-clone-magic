@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 import { QRCodeSVG } from 'qrcode.react';
 import {
