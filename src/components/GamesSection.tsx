@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { Link } from '@tanstack/react-router';
-import { ChevronDown, Download, Monitor, X, Trophy, ExternalLink } from 'lucide-react';
+import { useNavigate } from '@tanstack/react-router';
+import { Download, Monitor, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogClose, DialogTitle } from '@/components/ui/dialog';
 import HeaderVideo from '@/components/HeaderVideo';
-import YouTubeEmbed from '@/components/YouTubeEmbed';
 import SoftecBadgeDialog from '@/components/SoftecBadgeDialog';
 import { games, softecBadgeUrl, type Game } from '@/lib/games';
 import { videos } from '@/lib/videos';
@@ -21,10 +19,8 @@ const GameIcon = ({ game }: { game: Game }) => (
 );
 
 const GameRow = ({ game }: { game: Game }) => {
-  const [open, setOpen] = useState(false);
-  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+  const navigate = useNavigate({ from: '/' });
   const [badgeOpen, setBadgeOpen] = useState(false);
-  const hasMedia = game.videos.length > 0 || (game.screenshots && game.screenshots.length > 0);
 
   return (
     <>
@@ -32,9 +28,9 @@ const GameRow = ({ game }: { game: Game }) => {
         onClick={(e) => {
           // Never interfere with external links (downloads) or other buttons
           if ((e.target as HTMLElement).closest('a, button')) return;
-          if (hasMedia) setOpen(true);
+          navigate({ to: '/game/$gameId', params: { gameId: game.id } });
         }}
-        className={`overflow-hidden border-border/50 bg-card/60 backdrop-blur-sm card-interactive relative ${hasMedia ? 'cursor-pointer' : ''}`}
+        className="overflow-hidden border-border/50 bg-card/60 backdrop-blur-sm card-interactive relative cursor-pointer"
       >
         <CardContent className="p-4 md:p-5">
           <div className="flex items-center gap-4">
@@ -66,13 +62,6 @@ const GameRow = ({ game }: { game: Game }) => {
                 </button>
               )}
 
-              <Button asChild size="sm" variant="outline" className="gap-2">
-                <Link to="/game/$gameId" params={{ gameId: game.id }}>
-                  <ExternalLink className="h-4 w-4" />
-                  <span className="hidden md:inline">View page</span>
-                </Link>
-              </Button>
-
               {game.downloadUrl && (
                 <Button
                   asChild
@@ -86,8 +75,6 @@ const GameRow = ({ game }: { game: Game }) => {
                   </a>
                 </Button>
               )}
-
-              {hasMedia && <ChevronDown className="h-5 w-5 text-primary flex-shrink-0" aria-hidden />}
             </div>
           </div>
 
@@ -106,56 +93,6 @@ const GameRow = ({ game }: { game: Game }) => {
           )}
         </CardContent>
       </Card>
-
-      {/* Media dialog */}
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto bg-background">
-          <DialogTitle className="font-orbitron text-xl md:text-2xl">{game.title}</DialogTitle>
-          <div className="space-y-8 pt-2">
-            {game.videos.length > 0 && (
-              <div className="space-y-4">
-                <h4 className="font-orbitron font-semibold text-foreground">Videos</h4>
-                <div className="grid gap-4 md:grid-cols-2">
-                  {game.videos.map((v) => (
-                    <div key={v.youtubeId} className="space-y-2">
-                      <p className="text-sm text-muted-foreground">{v.label}</p>
-                      <YouTubeEmbed id={v.youtubeId} title={`${game.title} — ${v.label}`} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {game.screenshots && game.screenshots.length > 0 && (
-              <div className="space-y-4">
-                <h4 className="font-orbitron font-semibold text-foreground">Screenshots</h4>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {game.screenshots.map((src, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setZoomedImage(src)}
-                      className="aspect-video rounded-lg overflow-hidden border border-border/40 hover:border-primary transition-all"
-                    >
-                      <img src={src} alt={`${game.title} screenshot ${i + 1}`} className="w-full h-full object-cover" />
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Zoomed screenshot */}
-      <Dialog open={!!zoomedImage} onOpenChange={() => setZoomedImage(null)}>
-        <DialogContent className="max-w-[95vw] max-h-[95vh] p-0 bg-black/95">
-          <DialogTitle className="sr-only">Screenshot</DialogTitle>
-          <DialogClose className="absolute right-4 top-4 z-10">
-            <X className="h-6 w-6 text-white" />
-          </DialogClose>
-          {zoomedImage && <img src={zoomedImage} alt="Zoomed screenshot" className="w-full h-full object-contain" />}
-        </DialogContent>
-      </Dialog>
 
       {game.badge === 'softec' && <SoftecBadgeDialog open={badgeOpen} onOpenChange={setBadgeOpen} />}
     </>
