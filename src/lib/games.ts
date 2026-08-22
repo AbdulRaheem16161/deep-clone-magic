@@ -82,6 +82,8 @@ const AMONGUS_URL =
   'https://www.dropbox.com/scl/fo/dxqezegqtbcu2o5p7lvg9/AMvimBz9ng2o2dikeziuC5c?rlkey=f79hhftbgd8afk071pzxun8r3&st=efhhm4r9&dl=1';
 const RAMPAGE_URL =
   'https://drive.google.com/drive/folders/1kea4g1AuOgKC8n9S_vYkjMnqXMu10MEL?usp=sharing';
+const YOMA_APK_URL =
+  'https://www.dropbox.com/scl/fi/fca7niezgn7abg8s4q67r/YOMA.apk?rlkey=sn5pdsl7vwjjbnxhm6cju7hfj&st=oqdwqq8q&dl=1';
 
 export const games: Game[] = [
   {
