@@ -113,14 +113,6 @@ function GamePage() {
   const [badgeOpen, setBadgeOpen] = useState(false);
   const [zoomed, setZoomed] = useState<string | null>(null);
 
-  const otherGames = useMemo(
-    () =>
-      games
-        .filter((g) => g.id !== game.id)
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 5),
-    [game.id],
-  );
 
   return (
     <div className="min-h-screen bg-background">
