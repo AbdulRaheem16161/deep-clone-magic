@@ -131,6 +131,7 @@ export const games: Game[] = [
     icon: yomaIcon,
     iconFallback: 'Y',
     downloadUrl: YOMA_URL,
+    apkUrl: YOMA_APK_URL,
     mobile: true,
     videos: [{ label: 'Gameplay', youtubeId: 'dkD2cCXrAG0' }],
     screenshots: [
