@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 import { QRCodeSVG } from 'qrcode.react';
 import {
@@ -17,7 +17,8 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogClose, DialogTitle } from '@/components/ui/dialog';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 import SoftecBadgeDialog from '@/components/SoftecBadgeDialog';
-import { games, getGame, softecBadgeUrl, type Game } from '@/lib/games';
+import GameCardsList from '@/components/GameCards';
+import { getGame, softecBadgeUrl, type Game } from '@/lib/games';
 
 export const Route = createFileRoute('/game/$gameId')({
   loader: ({ params }) => {
@@ -113,14 +114,6 @@ function GamePage() {
   const [badgeOpen, setBadgeOpen] = useState(false);
   const [zoomed, setZoomed] = useState<string | null>(null);
 
-  const otherGames = useMemo(
-    () =>
-      games
-        .filter((g) => g.id !== game.id)
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 5),
-    [game.id],
-  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -252,27 +245,7 @@ function GamePage() {
             </Button>
           </div>
 
-          <div className="flex flex-wrap gap-5">
-            {otherGames.map((g) => (
-              <Link
-                key={g.id}
-                to="/game/$gameId"
-                params={{ gameId: g.id }}
-                className="group flex flex-col items-center gap-2 w-20"
-              >
-                <div className="w-16 h-16 rounded-2xl overflow-hidden border border-border/60 bg-muted flex items-center justify-center group-hover:border-primary group-hover:scale-105 transition-all">
-                  {g.icon ? (
-                    <img src={g.icon} alt={`${g.title} icon`} className="w-full h-full object-cover" />
-                  ) : (
-                    <span className="font-orbitron font-bold text-primary">{g.iconFallback}</span>
-                  )}
-                </div>
-                <span className="text-[11px] text-muted-foreground text-center leading-tight line-clamp-2">
-                  {g.title}
-                </span>
-              </Link>
-            ))}
-          </div>
+          <GameCardsList excludeId={game.id} />
         </section>
       </main>
 
