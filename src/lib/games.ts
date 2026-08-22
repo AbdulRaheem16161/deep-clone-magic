@@ -65,6 +65,8 @@ export type Game = {
   inProgress?: boolean;
   videos: { label: string; youtubeId: string }[];
   screenshots?: string[];
+  /** Android-specific screenshots — when present the game page shows a platform switch */
+  androidScreenshots?: string[];
   badge?: 'softec';
 };
 
