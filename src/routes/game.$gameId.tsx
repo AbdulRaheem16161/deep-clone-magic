@@ -17,7 +17,8 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogClose, DialogTitle } from '@/components/ui/dialog';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 import SoftecBadgeDialog from '@/components/SoftecBadgeDialog';
-import { games, getGame, softecBadgeUrl, type Game } from '@/lib/games';
+import GameCardsList from '@/components/GameCards';
+import { getGame, softecBadgeUrl, type Game } from '@/lib/games';
 
 export const Route = createFileRoute('/game/$gameId')({
   loader: ({ params }) => {
