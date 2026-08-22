@@ -113,6 +113,12 @@ function GamePage() {
   const [shareOpen, setShareOpen] = useState(false);
   const [badgeOpen, setBadgeOpen] = useState(false);
   const [zoomed, setZoomed] = useState<string | null>(null);
+  const [platform, setPlatform] = useState<'pc' | 'android'>('pc');
+
+  const hasAndroidGallery = !!game.androidScreenshots?.length;
+  const shots =
+    platform === 'android' && hasAndroidGallery ? game.androidScreenshots! : game.screenshots;
+
 
 
   return (
