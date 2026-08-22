@@ -145,6 +145,14 @@ export const games: Game[] = [
       yoma7Asset,
       yoma8Asset,
     ].map((a) => assetUrl(a.url)),
+    androidScreenshots: [
+      yomaAndroid1Asset,
+      yomaAndroid2Asset,
+      yomaAndroid3Asset,
+      yomaAndroid4Asset,
+      yomaAndroid5Asset,
+      yomaAndroid6Asset,
+    ].map((a) => assetUrl(a.url)),
   },
   {
     id: 'gumper',
