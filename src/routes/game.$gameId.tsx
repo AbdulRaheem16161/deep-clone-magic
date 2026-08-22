@@ -113,6 +113,12 @@ function GamePage() {
   const [shareOpen, setShareOpen] = useState(false);
   const [badgeOpen, setBadgeOpen] = useState(false);
   const [zoomed, setZoomed] = useState<string | null>(null);
+  const [platform, setPlatform] = useState<'pc' | 'android'>('pc');
+
+  const hasAndroidGallery = !!game.androidScreenshots?.length;
+  const shots =
+    platform === 'android' && hasAndroidGallery ? game.androidScreenshots! : game.screenshots;
+
 
 
   return (
@@ -176,33 +182,74 @@ function GamePage() {
           )}
         </section>
 
-        {/* Download buttons */}
-        <section className="flex flex-wrap gap-3">
-          {game.downloadUrl && (
-            <Button asChild size="lg" className="gap-2 bg-foreground hover:bg-foreground/90 text-background">
-              <a href={game.downloadUrl} target="_blank" rel="noopener noreferrer">
-                <Monitor className="h-5 w-5" />
-                Download for PC
-                <Download className="h-4 w-4" />
-              </a>
-            </Button>
-          )}
+        {/* Platform switch + download buttons */}
+        <section className="space-y-4">
           {game.mobile && (
-            <Button size="lg" variant="outline" disabled className="gap-2">
-              <Smartphone className="h-5 w-5" />
-              Android APK — coming soon
-            </Button>
+            <div className="inline-flex rounded-full border border-border/60 bg-muted/40 p-1">
+              <button
+                onClick={() => setPlatform('pc')}
+                className={`flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  platform === 'pc'
+                    ? 'bg-foreground text-background'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <Monitor className="h-4 w-4" />
+                Windows
+              </button>
+              <button
+                onClick={() => setPlatform('android')}
+                className={`flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  platform === 'android'
+                    ? 'bg-foreground text-background'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <Smartphone className="h-4 w-4" />
+                Android
+              </button>
+            </div>
           )}
+
+          <div className="flex flex-wrap gap-3">
+            {(!game.mobile || platform === 'pc') && game.downloadUrl && (
+              <Button asChild size="lg" className="gap-2 bg-foreground hover:bg-foreground/90 text-background">
+                <a href={game.downloadUrl} target="_blank" rel="noopener noreferrer">
+                  <Monitor className="h-5 w-5" />
+                  Download for PC
+                  <Download className="h-4 w-4" />
+                </a>
+              </Button>
+            )}
+            {game.mobile && platform === 'android' && (
+              game.apkUrl ? (
+                <Button asChild size="lg" className="gap-2 bg-foreground hover:bg-foreground/90 text-background">
+                  <a href={game.apkUrl} target="_blank" rel="noopener noreferrer">
+                    <Smartphone className="h-5 w-5" />
+                    Download Android APK
+                    <Download className="h-4 w-4" />
+                  </a>
+                </Button>
+              ) : (
+                <Button size="lg" variant="outline" disabled className="gap-2">
+                  <Smartphone className="h-5 w-5" />
+                  Android APK — coming soon
+                </Button>
+              )
+            )}
+          </div>
         </section>
 
         {/* Screenshots */}
-        {game.screenshots && game.screenshots.length > 0 && (
+        {shots && shots.length > 0 && (
           <section className="space-y-4">
-            <h2 className="font-orbitron text-xl font-bold text-foreground">Screenshots</h2>
+            <h2 className="font-orbitron text-xl font-bold text-foreground">
+              Screenshots{game.mobile ? ` — ${platform === 'android' ? 'Android' : 'Windows'}` : ''}
+            </h2>
             <div className="flex gap-4 overflow-x-auto pb-3 snap-x">
-              {game.screenshots.map((src, i) => (
+              {shots.map((src, i) => (
                 <button
-                  key={i}
+                  key={src}
                   onClick={() => setZoomed(src)}
                   className="snap-start flex-shrink-0 w-[280px] md:w-[420px] aspect-video rounded-xl overflow-hidden border border-border/50 hover:border-primary transition-colors"
                 >

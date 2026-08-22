@@ -31,6 +31,12 @@ import yoma6Asset from '@/assets/yoma/yoma-6.png.asset.json';
 import yoma7Asset from '@/assets/yoma/yoma-7.png.asset.json';
 import yoma8Asset from '@/assets/yoma/yoma-8.png.asset.json';
 import yomaCoverAsset from '@/assets/yoma/yoma-cover.jpg.asset.json';
+import yomaAndroid1Asset from '@/assets/yoma-android/yoma-android-1.png.asset.json';
+import yomaAndroid2Asset from '@/assets/yoma-android/yoma-android-2.png.asset.json';
+import yomaAndroid3Asset from '@/assets/yoma-android/yoma-android-3.png.asset.json';
+import yomaAndroid4Asset from '@/assets/yoma-android/yoma-android-4.png.asset.json';
+import yomaAndroid5Asset from '@/assets/yoma-android/yoma-android-5.png.asset.json';
+import yomaAndroid6Asset from '@/assets/yoma-android/yoma-android-6.png.asset.json';
 import doom3Asset from '@/assets/doom/doom-3.png.asset.json';
 import doom6Asset from '@/assets/doom/doom-6.png.asset.json';
 import doom7Asset from '@/assets/doom/doom-7.png.asset.json';
@@ -59,6 +65,8 @@ export type Game = {
   inProgress?: boolean;
   videos: { label: string; youtubeId: string }[];
   screenshots?: string[];
+  /** Android-specific screenshots — when present the game page shows a platform switch */
+  androidScreenshots?: string[];
   badge?: 'softec';
 };
 
@@ -74,6 +82,8 @@ const AMONGUS_URL =
   'https://www.dropbox.com/scl/fo/dxqezegqtbcu2o5p7lvg9/AMvimBz9ng2o2dikeziuC5c?rlkey=f79hhftbgd8afk071pzxun8r3&st=efhhm4r9&dl=1';
 const RAMPAGE_URL =
   'https://drive.google.com/drive/folders/1kea4g1AuOgKC8n9S_vYkjMnqXMu10MEL?usp=sharing';
+const YOMA_APK_URL =
+  'https://www.dropbox.com/scl/fi/fca7niezgn7abg8s4q67r/YOMA.apk?rlkey=sn5pdsl7vwjjbnxhm6cju7hfj&st=oqdwqq8q&dl=1';
 
 export const games: Game[] = [
   {
@@ -121,6 +131,7 @@ export const games: Game[] = [
     icon: yomaIcon,
     iconFallback: 'Y',
     downloadUrl: YOMA_URL,
+    apkUrl: YOMA_APK_URL,
     mobile: true,
     videos: [{ label: 'Gameplay', youtubeId: 'dkD2cCXrAG0' }],
     screenshots: [
@@ -133,6 +144,14 @@ export const games: Game[] = [
       yoma6Asset,
       yoma7Asset,
       yoma8Asset,
+    ].map((a) => assetUrl(a.url)),
+    androidScreenshots: [
+      yomaAndroid1Asset,
+      yomaAndroid2Asset,
+      yomaAndroid3Asset,
+      yomaAndroid4Asset,
+      yomaAndroid5Asset,
+      yomaAndroid6Asset,
     ].map((a) => assetUrl(a.url)),
   },
   {
