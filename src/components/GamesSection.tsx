@@ -3,7 +3,6 @@ import { useNavigate } from '@tanstack/react-router';
 import { Download, Monitor, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import HeaderVideo from '@/components/HeaderVideo';
 import SoftecBadgeDialog from '@/components/SoftecBadgeDialog';
 import { games, softecBadgeUrl, type Game } from '@/lib/games';
