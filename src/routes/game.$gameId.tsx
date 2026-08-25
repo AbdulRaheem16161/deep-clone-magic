@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 import { QRCodeSVG } from 'qrcode.react';
 import {
@@ -18,7 +18,9 @@ import { Dialog, DialogContent, DialogClose, DialogTitle } from '@/components/ui
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 import SoftecBadgeDialog from '@/components/SoftecBadgeDialog';
 import GameCardsList from '@/components/GameCards';
+import GameReviews from '@/components/GameReviews';
 import { getGame, softecBadgeUrl, type Game } from '@/lib/games';
+import { fetchGameStats, incrementDownload, type GameStats } from '@/lib/game-data';
 
 export const Route = createFileRoute('/game/$gameId')({
   loader: ({ params }) => {
@@ -114,6 +116,30 @@ function GamePage() {
   const [badgeOpen, setBadgeOpen] = useState(false);
   const [zoomed, setZoomed] = useState<string | null>(null);
   const [platform, setPlatform] = useState<'pc' | 'android'>('pc');
+  const [stats, setStats] = useState<GameStats | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setStats(null);
+    fetchGameStats(gameId).then((s) => {
+      if (!cancelled) setStats(s);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [gameId]);
+
+  const trackDownload = () => {
+    // Fire-and-forget so the native download/navigation is never blocked.
+    setStats((prev) =>
+      prev ? { ...prev, downloadCount: prev.downloadCount + 1 } : prev,
+    );
+    void incrementDownload(gameId).then((count) => {
+      if (count != null) {
+        setStats((prev) => (prev ? { ...prev, downloadCount: count } : prev));
+      }
+    });
+  };
 
   const hasAndroidGallery = !!game.androidScreenshots?.length;
   const shots =
@@ -211,10 +237,32 @@ function GamePage() {
             </div>
           )}
 
+          {/* Download info — Play Store style stats */}
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+            <div className="flex flex-col">
+              <span className="font-orbitron text-lg font-bold text-foreground tabular-nums">
+                {stats ? stats.downloadCount.toLocaleString() : '—'}
+              </span>
+              <span className="text-xs text-muted-foreground">Downloads</span>
+            </div>
+            <div className="h-8 w-px bg-border/60" aria-hidden />
+            <div className="flex flex-col">
+              <span className="font-orbitron text-lg font-bold text-foreground">
+                {stats ? stats.downloadSize : '—'}
+              </span>
+              <span className="text-xs text-muted-foreground">Size</span>
+            </div>
+          </div>
+
           <div className="flex flex-wrap gap-3">
             {(!game.mobile || platform === 'pc') && game.downloadUrl && (
               <Button asChild size="lg" className="gap-2 bg-foreground hover:bg-foreground/90 text-background">
-                <a href={game.downloadUrl} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={game.downloadUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={trackDownload}
+                >
                   <Monitor className="h-5 w-5" />
                   Download for PC
                   <Download className="h-4 w-4" />
@@ -224,7 +272,12 @@ function GamePage() {
             {game.mobile && platform === 'android' && (
               game.apkUrl ? (
                 <Button asChild size="lg" className="gap-2 bg-foreground hover:bg-foreground/90 text-background">
-                  <a href={game.apkUrl} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={game.apkUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={trackDownload}
+                  >
                     <Smartphone className="h-5 w-5" />
                     Download Android APK
                     <Download className="h-4 w-4" />
@@ -279,6 +332,9 @@ function GamePage() {
             </div>
           </section>
         )}
+
+        {/* User Reviews */}
+        <GameReviews gameId={game.id} gameTitle={game.title} />
 
         {/* Other games */}
         <section className="space-y-5 border-t border-border/50 pt-10">
