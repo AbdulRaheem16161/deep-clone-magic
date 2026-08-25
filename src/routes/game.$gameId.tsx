@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 import { QRCodeSVG } from 'qrcode.react';
 import {
@@ -18,7 +18,9 @@ import { Dialog, DialogContent, DialogClose, DialogTitle } from '@/components/ui
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 import SoftecBadgeDialog from '@/components/SoftecBadgeDialog';
 import GameCardsList from '@/components/GameCards';
+import GameReviews from '@/components/GameReviews';
 import { getGame, softecBadgeUrl, type Game } from '@/lib/games';
+import { fetchGameStats, incrementDownload, type GameStats } from '@/lib/game-data';
 
 export const Route = createFileRoute('/game/$gameId')({
   loader: ({ params }) => {
@@ -114,6 +116,30 @@ function GamePage() {
   const [badgeOpen, setBadgeOpen] = useState(false);
   const [zoomed, setZoomed] = useState<string | null>(null);
   const [platform, setPlatform] = useState<'pc' | 'android'>('pc');
+  const [stats, setStats] = useState<GameStats | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setStats(null);
+    fetchGameStats(gameId).then((s) => {
+      if (!cancelled) setStats(s);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [gameId]);
+
+  const trackDownload = () => {
+    // Fire-and-forget so the native download/navigation is never blocked.
+    setStats((prev) =>
+      prev ? { ...prev, downloadCount: prev.downloadCount + 1 } : prev,
+    );
+    void incrementDownload(gameId).then((count) => {
+      if (count != null) {
+        setStats((prev) => (prev ? { ...prev, downloadCount: count } : prev));
+      }
+    });
+  };
 
   const hasAndroidGallery = !!game.androidScreenshots?.length;
   const shots =
