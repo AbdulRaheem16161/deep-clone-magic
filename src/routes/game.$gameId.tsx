@@ -237,10 +237,32 @@ function GamePage() {
             </div>
           )}
 
+          {/* Download info — Play Store style stats */}
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+            <div className="flex flex-col">
+              <span className="font-orbitron text-lg font-bold text-foreground tabular-nums">
+                {stats ? stats.downloadCount.toLocaleString() : '—'}
+              </span>
+              <span className="text-xs text-muted-foreground">Downloads</span>
+            </div>
+            <div className="h-8 w-px bg-border/60" aria-hidden />
+            <div className="flex flex-col">
+              <span className="font-orbitron text-lg font-bold text-foreground">
+                {stats ? stats.downloadSize : '—'}
+              </span>
+              <span className="text-xs text-muted-foreground">Size</span>
+            </div>
+          </div>
+
           <div className="flex flex-wrap gap-3">
             {(!game.mobile || platform === 'pc') && game.downloadUrl && (
               <Button asChild size="lg" className="gap-2 bg-foreground hover:bg-foreground/90 text-background">
-                <a href={game.downloadUrl} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={game.downloadUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={trackDownload}
+                >
                   <Monitor className="h-5 w-5" />
                   Download for PC
                   <Download className="h-4 w-4" />
@@ -250,7 +272,12 @@ function GamePage() {
             {game.mobile && platform === 'android' && (
               game.apkUrl ? (
                 <Button asChild size="lg" className="gap-2 bg-foreground hover:bg-foreground/90 text-background">
-                  <a href={game.apkUrl} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={game.apkUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={trackDownload}
+                  >
                     <Smartphone className="h-5 w-5" />
                     Download Android APK
                     <Download className="h-4 w-4" />
@@ -305,6 +332,9 @@ function GamePage() {
             </div>
           </section>
         )}
+
+        {/* User Reviews */}
+        <GameReviews gameId={game.id} gameTitle={game.title} />
 
         {/* Other games */}
         <section className="space-y-5 border-t border-border/50 pt-10">
