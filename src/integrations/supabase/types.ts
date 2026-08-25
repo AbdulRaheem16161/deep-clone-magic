@@ -14,13 +14,65 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      game_reviews: {
+        Row: {
+          created_at: string
+          game_id: string
+          id: string
+          rating: number
+          review_text: string
+          username: string
+        }
+        Insert: {
+          created_at?: string
+          game_id: string
+          id?: string
+          rating: number
+          review_text: string
+          username: string
+        }
+        Update: {
+          created_at?: string
+          game_id?: string
+          id?: string
+          rating?: number
+          review_text?: string
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_reviews_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "game_stats"
+            referencedColumns: ["game_id"]
+          },
+        ]
+      }
+      game_stats: {
+        Row: {
+          download_count: number
+          download_size: string
+          game_id: string
+        }
+        Insert: {
+          download_count?: number
+          download_size?: string
+          game_id: string
+        }
+        Update: {
+          download_count?: number
+          download_size?: string
+          game_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_downloads: { Args: { p_game_id: string }; Returns: number }
     }
     Enums: {
       [_ in never]: never
