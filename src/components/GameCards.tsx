@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { Download, Monitor, Trophy } from 'lucide-react';
+import { Download, Monitor, Smartphone, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import SoftecBadgeDialog from '@/components/SoftecBadgeDialog';
-import { games, softecBadgeUrl, type Game } from '@/lib/games';
+import { studioGames, softecBadgeUrl, type Game } from '@/lib/games';
 
 const GameIcon = ({ game }: { game: Game }) => (
   <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-primary/50 flex-shrink-0 bg-muted flex items-center justify-center">
@@ -70,6 +70,7 @@ export const GameRow = ({ game }: { game: Game }) => {
                     <Download className="h-4 w-4" />
                     <span className="hidden sm:inline">Download</span>
                     <Monitor className="h-4 w-4" />
+                    {game.mobile && <Smartphone className="h-4 w-4" />}
                   </a>
                 </Button>
               )}
@@ -97,9 +98,15 @@ export const GameRow = ({ game }: { game: Game }) => {
   );
 };
 
-export const GameCardsList = ({ excludeId }: { excludeId?: string }) => (
+export const GameCardsList = ({
+  excludeId,
+  items,
+}: {
+  excludeId?: string;
+  items?: Game[];
+}) => (
   <div className="space-y-4">
-    {games
+    {(items ?? studioGames)
       .filter((g) => g.id !== excludeId)
       .map((game) => (
         <GameRow key={game.id} game={game} />
