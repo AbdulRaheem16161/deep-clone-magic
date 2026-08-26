@@ -50,6 +50,14 @@ import { assetUrl } from './asset-url';
 export const softecBadgeUrl = assetUrl(softecBadgeAsset.url);
 export const ituAwardUrl = assetUrl(ituAwardAsset.url);
 
+export type Review = {
+  title: string;
+  stars: number;
+  date: string;
+  author: string;
+  body: string;
+};
+
 export type Game = {
   id: string;
   title: string;
@@ -68,22 +76,38 @@ export type Game = {
   /** Android-specific screenshots — when present the game page shows a platform switch */
   androidScreenshots?: string[];
   badge?: 'softec';
+  /** Windows build size, e.g. "111.91 MB" */
+  size?: string;
+  /** Credits for community-made games */
+  createdBy?: string[];
+  /** true = made by other creators, shown in its own sub-section */
+  community?: boolean;
+  rating?: number;
+  ratingCount?: number;
+  reviews?: Review[];
 };
 
 const DOOM_URL =
-  'https://www.dropbox.com/scl/fo/8zl5w2jskyfflzb6ydsff/AJUbYOaLnc4FPhhM18iQ_Mg?rlkey=2yswlahqgt6rb4eehsq9615tj&st=91bbjxry&dl=1';
+  'https://www.dropbox.com/scl/fi/my5qkguxsxbjre0vcx6js/DOOM.zip?rlkey=lwdhra4jhatnng4qhfubjf6io&st=tt51avfz&dl=1';
 const CURE_URL =
-  'https://www.dropbox.com/scl/fo/iv9f6r9xvlyzjpqvotfky/AE0q5cgw0pwvRRixwTplsWg?rlkey=n40j37ba1y8yrii8uvvjzu5gy&st=jjp6cjav&dl=1';
+  'https://www.dropbox.com/scl/fi/5dwhp2ny8d54mmrvk76l3/Cure-and-Infection.zip?rlkey=cpedd2ch8svg267aaqbzxrxic&st=vsr9edng&dl=1';
 const YOMA_URL =
   'https://www.dropbox.com/scl/fo/oa5ltyhtee8g73fw0p2xa/ALtnP8xIFsdG2-O1uwyw4gU?rlkey=7lf0dnk0bliwowkh1n831pu74&st=s4abhfz5&dl=1';
 const GUMPER_URL =
-  'https://www.dropbox.com/scl/fo/57h1uqd92v5hjaeyax5ce/AEJfaOQrGH0nm3B2atgwksQ?rlkey=3t7i9kcln7dnd6pekt5z4s2je&st=r5y1llfl&dl=1';
+  'https://www.dropbox.com/scl/fi/ndsqrrf3jqf7rnltkbege/Gumper-Bumper-World.zip?rlkey=ucjbkbnceb3en6f5rcfdgfr3n&st=nv6mnys4&dl=1';
 const AMONGUS_URL =
-  'https://www.dropbox.com/scl/fo/dxqezegqtbcu2o5p7lvg9/AMvimBz9ng2o2dikeziuC5c?rlkey=f79hhftbgd8afk071pzxun8r3&st=efhhm4r9&dl=1';
+  'https://www.dropbox.com/scl/fi/p13p3clm418gebcvwwwz2/AmongUs-3D.zip?rlkey=5w6ph54vjr5oh7jdunhb7oc8j&st=u4h24rkm&dl=1';
 const RAMPAGE_URL =
-  'https://drive.google.com/drive/folders/1kea4g1AuOgKC8n9S_vYkjMnqXMu10MEL?usp=sharing';
+  'https://www.dropbox.com/scl/fi/lzdpgr38pemwng4rv4x0i/Car-Horde-Survival.zip?rlkey=1xei3xn95i7x9it1z1lho0ivm&st=klwb90xd&dl=1';
 const YOMA_APK_URL =
   'https://www.dropbox.com/scl/fi/fca7niezgn7abg8s4q67r/YOMA.apk?rlkey=sn5pdsl7vwjjbnxhm6cju7hfj&st=oqdwqq8q&dl=1';
+const SHAPIO_URL =
+  'https://www.dropbox.com/scl/fi/rav3r6dvn0vjy2x8fsyaw/Saving-shapio.zip?rlkey=h7dkqdowy2u5oypri6bsc7ssy&st=5kqbwrlc&dl=1';
+const ROADRUSH_URL =
+  'https://www.dropbox.com/scl/fi/mmn0z27hp2orqebpkb80h/Road-Rush.zip?rlkey=lu3221zk7t4uvbvl4or5jvf2k&st=ul52yzeo&dl=1';
+const FOXJOURNEY_URL =
+  'https://www.dropbox.com/scl/fi/pumuo75n9ms4gg336rvmy/Fox-Journey.zip?rlkey=lxcc8stc4ce1j1r9x3uqyfl9b&st=2vv57jj2&dl=1';
+
 
 export const games: Game[] = [
   {
