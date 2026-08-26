@@ -136,6 +136,8 @@ export const games: Game[] = [
     icon: cureInfectionIcon,
     iconFallback: 'C',
     downloadUrl: CURE_URL,
+    size: '109.58 MB',
+
     videos: [
       { label: 'Full Length Gameplay', youtubeId: 'Xmvg2rPg59Q' },
       { label: 'Highlights', youtubeId: 'BRfepakrNBo' },
