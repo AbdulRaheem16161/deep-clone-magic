@@ -189,6 +189,8 @@ export const games: Game[] = [
     icon: gumperIcon,
     iconFallback: 'G',
     downloadUrl: GUMPER_URL,
+    size: '39.21 MB',
+
     badge: 'softec',
     videos: [
       { label: 'Gameplay', youtubeId: 'e059N0rVpPM' },
