@@ -72,7 +72,7 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     name: 'AbdulRaheem',
-    role: 'Lead Programmer',
+    role: 'Programmer',
     intro: 'I build immersive gaming experiences with clean, efficient code.',
     initials: 'AR',
     image: abdulraheemImg,
