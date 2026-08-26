@@ -117,6 +117,8 @@ export const games: Game[] = [
     icon: doomIcon,
     iconFallback: 'D',
     downloadUrl: DOOM_URL,
+    size: '103.79 MB',
+
     videos: [
       { label: 'Gameplay', youtubeId: 'pggCjcIgk7k' },
       { label: 'Gameplay 2', youtubeId: 'i-jQMD8Vezk' },
