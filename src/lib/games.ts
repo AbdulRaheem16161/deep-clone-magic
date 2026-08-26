@@ -204,6 +204,8 @@ export const games: Game[] = [
     icon: amongusIcon,
     iconFallback: 'A',
     downloadUrl: AMONGUS_URL,
+    size: '111.91 MB',
+
     videos: [
       { label: 'Gameplay', youtubeId: 'S9udobAwd8A' },
       { label: 'Devlog', youtubeId: 'S0t_FS6bSyw' },
