@@ -228,6 +228,7 @@ export const games: Game[] = [
     icon: assetUrl(rampageIconAsset.url),
     iconFallback: 'R',
     downloadUrl: RAMPAGE_URL,
+    size: '146.04 MB',
     mobile: true,
     inProgress: true,
     videos: [
@@ -242,6 +243,43 @@ export const games: Game[] = [
       rampage6Asset,
     ].map((a) => assetUrl(a.url)),
   },
+  {
+    id: 'savingshapio',
+    title: 'Saving Shapio',
+    tagline: 'Puzzle-platform rescue adventure',
+    iconFallback: 'S',
+    downloadUrl: SHAPIO_URL,
+    size: '48.37 MB',
+    community: true,
+    createdBy: ['Mustafa', 'Khairia Batool', 'Esha Durasmeen'],
+    videos: [],
+  },
+  {
+    id: 'roadrush',
+    title: 'Road Rush',
+    tagline: 'High-speed arcade driving',
+    iconFallback: 'R',
+    downloadUrl: ROADRUSH_URL,
+    size: '40.4 MB',
+    community: true,
+    createdBy: ['Tayyiba Fatima'],
+    videos: [],
+  },
+  {
+    id: 'foxjourney',
+    title: 'Fox Journey',
+    tagline: 'A little fox, a long journey',
+    iconFallback: 'F',
+    downloadUrl: FOXJOURNEY_URL,
+    size: '58.79 MB',
+    community: true,
+    createdBy: ['Bint e Saif'],
+    videos: [],
+  },
 ];
+
+export const studioGames = games.filter((g) => !g.community);
+export const communityGames = games.filter((g) => g.community);
+
 
 export const getGame = (id: string) => games.find((g) => g.id === id);
