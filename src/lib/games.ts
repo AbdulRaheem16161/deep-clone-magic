@@ -45,6 +45,16 @@ import doom9Asset from '@/assets/doom/doom-9.png.asset.json';
 import softecBadgeAsset from '@/assets/community/softec-badge.png.asset.json';
 import ituAwardAsset from '@/assets/community/itu-award.jpg.asset.json';
 
+import shapioIconAsset from '@/assets/community-games/shapio-icon.png.asset.json';
+import roadRushIconAsset from '@/assets/community-games/road-rush-icon.png.asset.json';
+import foxJourneyIconAsset from '@/assets/community-games/fox-journey-icon.png.asset.json';
+import shapio1Asset from '@/assets/community-games/shapio-1.jpeg.asset.json';
+import shapio2Asset from '@/assets/community-games/shapio-2.jpeg.asset.json';
+import shapio3Asset from '@/assets/community-games/shapio-3.jpeg.asset.json';
+import shapio4Asset from '@/assets/community-games/shapio-4.jpeg.asset.json';
+import shapio5Asset from '@/assets/community-games/shapio-5.jpeg.asset.json';
+import shapio6Asset from '@/assets/community-games/shapio-6.jpeg.asset.json';
+
 import { assetUrl } from './asset-url';
 
 export const softecBadgeUrl = assetUrl(softecBadgeAsset.url);
