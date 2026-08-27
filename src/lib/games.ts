@@ -45,6 +45,16 @@ import doom9Asset from '@/assets/doom/doom-9.png.asset.json';
 import softecBadgeAsset from '@/assets/community/softec-badge.png.asset.json';
 import ituAwardAsset from '@/assets/community/itu-award.jpg.asset.json';
 
+import shapioIconAsset from '@/assets/community-games/shapio-icon.png.asset.json';
+import roadRushIconAsset from '@/assets/community-games/road-rush-icon.png.asset.json';
+import foxJourneyIconAsset from '@/assets/community-games/fox-journey-icon.png.asset.json';
+import shapio1Asset from '@/assets/community-games/shapio-1.jpeg.asset.json';
+import shapio2Asset from '@/assets/community-games/shapio-2.jpeg.asset.json';
+import shapio3Asset from '@/assets/community-games/shapio-3.jpeg.asset.json';
+import shapio4Asset from '@/assets/community-games/shapio-4.jpeg.asset.json';
+import shapio5Asset from '@/assets/community-games/shapio-5.jpeg.asset.json';
+import shapio6Asset from '@/assets/community-games/shapio-6.jpeg.asset.json';
+
 import { assetUrl } from './asset-url';
 
 export const softecBadgeUrl = assetUrl(softecBadgeAsset.url);
@@ -78,8 +88,12 @@ export type Game = {
   badge?: 'softec';
   /** Windows build size, e.g. "111.91 MB" */
   size?: string;
-  /** Credits for community-made games */
+  /** Credits shown as a "Created by" list (multi-person community games) */
   createdBy?: string[];
+  /** Single developer name shown in the info strip (overrides the default) */
+  developer?: string;
+  /** Label for the community pill, e.g. "Game developers Club" */
+  communityLabel?: string;
   /** true = made by other creators, shown in its own sub-section */
   community?: boolean;
   rating?: number;
@@ -247,34 +261,47 @@ export const games: Game[] = [
     id: 'savingshapio',
     title: 'Saving Shapio',
     tagline: 'Puzzle-platform rescue adventure',
+    icon: assetUrl(shapioIconAsset.url),
     iconFallback: 'S',
     downloadUrl: SHAPIO_URL,
     size: '48.37 MB',
     community: true,
     createdBy: ['Mustafa', 'Khairia Batool', 'Esha Durasmeen'],
-    videos: [],
+    screenshots: [
+      shapio1Asset,
+      shapio2Asset,
+      shapio3Asset,
+      shapio4Asset,
+      shapio5Asset,
+      shapio6Asset,
+    ].map((a) => assetUrl(a.url)),
+    videos: [{ label: 'Gameplay', youtubeId: '_fedNJsjUR4' }],
   },
   {
     id: 'roadrush',
     title: 'Road Rush',
     tagline: 'High-speed arcade driving',
+    icon: assetUrl(roadRushIconAsset.url),
     iconFallback: 'R',
     downloadUrl: ROADRUSH_URL,
     size: '40.4 MB',
     community: true,
-    createdBy: ['Tayyiba Fatima'],
-    videos: [],
+    communityLabel: 'Game developers Club',
+    developer: 'Tayyiba Fatima',
+    videos: [{ label: 'Gameplay', youtubeId: '06Ouol5HCLo' }],
   },
   {
     id: 'foxjourney',
     title: 'Fox Journey',
     tagline: 'A little fox, a long journey',
+    icon: assetUrl(foxJourneyIconAsset.url),
     iconFallback: 'F',
     downloadUrl: FOXJOURNEY_URL,
     size: '58.79 MB',
     community: true,
-    createdBy: ['Bint e Saif'],
-    videos: [],
+    communityLabel: 'Game developers Club',
+    developer: 'Bint e Saif',
+    videos: [{ label: 'Gameplay', youtubeId: 'ElcVaPqANPU' }],
   },
 ];
 
