@@ -88,8 +88,12 @@ export type Game = {
   badge?: 'softec';
   /** Windows build size, e.g. "111.91 MB" */
   size?: string;
-  /** Credits for community-made games */
+  /** Credits shown as a "Created by" list (multi-person community games) */
   createdBy?: string[];
+  /** Single developer name shown in the info strip (overrides the default) */
+  developer?: string;
+  /** Label for the community pill, e.g. "Game developers Club" */
+  communityLabel?: string;
   /** true = made by other creators, shown in its own sub-section */
   community?: boolean;
   rating?: number;
