@@ -12,13 +12,15 @@ import {
   Trophy,
   X,
   ChevronRight,
-  Star,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogClose, DialogTitle } from '@/components/ui/dialog';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 import SoftecBadgeDialog from '@/components/SoftecBadgeDialog';
 import GameCardsList from '@/components/GameCards';
+import GameReviews from '@/components/GameReviews';
+import { TeamGrid } from '@/components/MeetTheTeam';
+import { useDownloadCount, formatCount } from '@/lib/game-social';
 import { getGame, softecBadgeUrl, communityGames, type Game } from '@/lib/games';
 
 export const Route = createFileRoute('/game/$gameId')({
@@ -128,90 +130,6 @@ const ShareDialog = ({
   );
 };
 
-const Stars = ({ value, className = 'h-3.5 w-3.5' }: { value: number; className?: string }) => (
-  <div className="flex items-center gap-0.5">
-    {[1, 2, 3, 4, 5].map((i) => (
-      <Star
-        key={i}
-        className={`${className} ${
-          i <= Math.round(value) ? 'fill-orange text-orange' : 'text-muted-foreground/40'
-        }`}
-      />
-    ))}
-  </div>
-);
-
-const RatingsReviews = ({ game }: { game: Game }) => {
-  const reviews = game.reviews ?? [];
-  const rating = game.rating;
-
-  return (
-    <section className="space-y-6">
-      <h2 className="flex items-center gap-1 text-[22px] font-semibold tracking-tight text-foreground">
-        Ratings &amp; Reviews
-        <ChevronRight className="h-5 w-5 text-muted-foreground" />
-      </h2>
-
-      {rating ? (
-        <div className="flex items-end gap-8">
-          <div>
-            <p className="text-[64px] leading-none font-semibold tracking-tight text-foreground">
-              {rating.toFixed(1)}
-            </p>
-            <p className="mt-1 text-sm font-medium text-muted-foreground">out of 5</p>
-          </div>
-          <div className="flex-1 max-w-md space-y-1.5 pb-2">
-            {[5, 4, 3, 2, 1].map((stars) => {
-              const count = reviews.filter((r) => Math.round(r.stars) === stars).length;
-              const pct = reviews.length ? (count / reviews.length) * 100 : 0;
-              return (
-                <div key={stars} className="flex items-center gap-2">
-                  <div className="flex w-16 justify-end gap-[1px] text-muted-foreground">
-                    {Array.from({ length: stars }).map((_, i) => (
-                      <Star key={i} className="h-2.5 w-2.5 fill-current" />
-                    ))}
-                  </div>
-                  <div className="h-[3px] flex-1 rounded-full bg-muted-foreground/25">
-                    <div
-                      className="h-full rounded-full bg-muted-foreground"
-                      style={{ width: `${pct}%` }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-            <p className="pt-1 text-right text-sm text-muted-foreground">
-              {game.ratingCount ?? reviews.length} Ratings
-            </p>
-          </div>
-        </div>
-      ) : (
-        <p className="text-sm text-muted-foreground">
-          No ratings yet — play {game.title} and be the first to review it.
-        </p>
-      )}
-
-      {reviews.length > 0 && (
-        <div className="grid gap-4 md:grid-cols-2">
-          {reviews.map((r) => (
-            <div key={`${r.author}-${r.title}`} className="rounded-2xl bg-muted/40 p-5">
-              <div className="flex items-start justify-between gap-4">
-                <p className="font-semibold text-foreground">{r.title}</p>
-                <p className="whitespace-nowrap text-xs text-muted-foreground">{r.date}</p>
-              </div>
-              <div className="mt-1.5 flex items-center justify-between gap-4">
-                <Stars value={r.stars} />
-                <p className="text-xs text-muted-foreground">{r.author}</p>
-              </div>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{r.body}</p>
-            </div>
-          ))}
-        </div>
-      )}
-    </section>
-  );
-};
-
 function GamePage() {
   const { gameId } = Route.useParams();
   const game = getGame(gameId)!;
@@ -219,6 +137,8 @@ function GamePage() {
   const [badgeOpen, setBadgeOpen] = useState(false);
   const [zoomed, setZoomed] = useState<string | null>(null);
   const [platform, setPlatform] = useState<'pc' | 'android'>('pc');
+  const [teamOpen, setTeamOpen] = useState(false);
+  const { count, register } = useDownloadCount(game.id);
 
   const hasAndroidGallery = !!game.androidScreenshots?.length;
   const shots =
@@ -284,6 +204,7 @@ function GamePage() {
               )}
               <p className="text-sm text-muted-foreground">
                 Free · {game.mobile ? 'Windows & Android' : 'Windows'}
+                {count !== null && count > 0 && ` · ${formatCount(count)} downloads`}
               </p>
 
               <div className="flex flex-wrap items-center gap-2 pt-2">
@@ -355,7 +276,12 @@ function GamePage() {
                   size="lg"
                   className="gap-2 rounded-full bg-foreground hover:bg-foreground/90 text-background"
                 >
-                  <a href={game.downloadUrl} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={game.downloadUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => void register()}
+                  >
                     <Monitor className="h-5 w-5" />
                     Download for PC
                     <Download className="h-4 w-4" />
@@ -370,7 +296,12 @@ function GamePage() {
                     size="lg"
                     className="gap-2 rounded-full bg-foreground hover:bg-foreground/90 text-background"
                   >
-                    <a href={game.apkUrl} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={game.apkUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => void register()}
+                    >
                       <Smartphone className="h-5 w-5" />
                       Download Android APK
                       <Download className="h-4 w-4" />
@@ -390,15 +321,26 @@ function GamePage() {
       {/* Info strip */}
       <section className="border-b border-border/50 bg-muted/20">
         <div className="container mx-auto max-w-5xl px-4">
-          <dl className="grid grid-cols-2 divide-border/50 py-6 text-center sm:grid-cols-4 sm:divide-x">
-            <div className="px-2 py-2">
-              <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                Developer
-              </dt>
-              <dd className="mt-1 text-sm font-semibold text-foreground">
-                {game.community ? game.createdBy?.[0] ?? 'Community' : 'DeepCut Originals'}
-              </dd>
-            </div>
+          <dl className="grid grid-cols-2 divide-border/50 py-6 text-center sm:grid-cols-3 md:grid-cols-4 sm:divide-x">
+            {!game.createdBy?.length && (
+              <div className="px-2 py-2">
+                <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  Developer
+                </dt>
+                <dd className="mt-1 text-sm font-semibold text-foreground">
+                  {game.community ? (
+                    game.developer ?? 'Community'
+                  ) : (
+                    <button
+                      onClick={() => setTeamOpen(true)}
+                      className="underline decoration-dotted underline-offset-4 transition-colors hover:text-primary"
+                    >
+                      DeepCut Originals
+                    </button>
+                  )}
+                </dd>
+              </div>
+            )}
             <div className="px-2 py-2">
               <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 Size
@@ -478,7 +420,7 @@ function GamePage() {
           </section>
         )}
 
-        <RatingsReviews game={game} />
+        <GameReviews gameId={game.id} gameTitle={game.title} />
 
         {/* Other games */}
         <section className="space-y-5 border-t border-border/50 pt-10">
@@ -504,6 +446,17 @@ function GamePage() {
           </div>
         </section>
       </main>
+
+      <Dialog open={teamOpen} onOpenChange={setTeamOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-background">
+          <DialogTitle className="font-orbitron text-xl text-center">
+            Meet The Team
+          </DialogTitle>
+          <div className="pt-2">
+            <TeamGrid />
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <ShareDialog game={game} open={shareOpen} onOpenChange={setShareOpen} />
       {game.badge === 'softec' && <SoftecBadgeDialog open={badgeOpen} onOpenChange={setBadgeOpen} />}
