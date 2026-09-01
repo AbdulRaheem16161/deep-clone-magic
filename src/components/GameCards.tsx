@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { Download, Trophy } from 'lucide-react';
+import { Download } from 'lucide-react';
 import SoftecBadgeDialog from '@/components/SoftecBadgeDialog';
 import { studioGames, softecBadgeUrl, type Game } from '@/lib/games';
 import { useDownloadCount, formatCount } from '@/lib/game-social';
-import { Stars } from '@/components/GameReviews';
 
 const GameIcon = ({ game }: { game: Game }) => (
   <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-[14px] border border-border/60 bg-muted flex items-center justify-center">
