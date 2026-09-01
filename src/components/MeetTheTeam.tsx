@@ -168,6 +168,57 @@ const SocialButton = ({
   );
 };
 
+export const TeamGrid = () => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+    {teamMembers.map(member => (
+      <Card 
+        key={member.name} 
+        className="hover:shadow-lg transition-shadow duration-300 border-border/50 bg-card/50 backdrop-blur-sm"
+      >
+        <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
+          {/* Avatar */}
+          <Avatar className="w-24 h-24 border-4 border-foreground/30">
+            {member.image ? (
+              <AvatarImage src={member.image} alt={member.name} className="object-cover" />
+            ) : null}
+            <AvatarFallback className="bg-muted text-xl font-semibold">
+              <User className="w-12 h-12 text-muted-foreground" />
+            </AvatarFallback>
+          </Avatar>
+
+          {/* Name and Role */}
+          <div>
+            <h3 className="text-xl font-semibold font-orbitron mb-1 text-foreground">
+              {member.name}
+            </h3>
+            <p className="text-primary font-medium text-sm">
+              {member.role}
+            </p>
+          </div>
+
+          {/* Intro */}
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {member.intro}
+          </p>
+
+          {/* Social Links */}
+          {Object.keys(member.socials).length > 0 && (
+            <div className="flex flex-wrap justify-center gap-2 pt-2">
+              {member.socials.linkedin && <SocialButton type="linkedin" url={member.socials.linkedin} />}
+              {member.socials.whatsapp && <SocialButton type="whatsapp" url={member.socials.whatsapp} />}
+              {member.socials.discord && <SocialButton type="discord" url={member.socials.discord} />}
+              {member.socials.youtube && <SocialButton type="youtube" url={member.socials.youtube} />}
+              {member.socials.fiverr && <SocialButton type="fiverr" url={member.socials.fiverr} />}
+              {member.socials.instagram && <SocialButton type="instagram" url={member.socials.instagram} />}
+              {member.socials.itchio && <SocialButton type="itchio" url={member.socials.itchio} />}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+);
+
 const MeetTheTeam = () => {
   return (
     <section id="team" className="py-20 px-4 bg-muted/30">
@@ -181,54 +232,7 @@ const MeetTheTeam = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          {teamMembers.map(member => (
-            <Card 
-              key={member.name} 
-              className="hover:shadow-lg transition-shadow duration-300 border-border/50 bg-card/50 backdrop-blur-sm"
-            >
-              <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
-                {/* Avatar */}
-                <Avatar className="w-24 h-24 border-4 border-foreground/30">
-                  {member.image ? (
-                    <AvatarImage src={member.image} alt={member.name} className="object-cover" />
-                  ) : null}
-                  <AvatarFallback className="bg-muted text-xl font-semibold">
-                    <User className="w-12 h-12 text-muted-foreground" />
-                  </AvatarFallback>
-                </Avatar>
-
-                {/* Name and Role */}
-                <div>
-                  <h3 className="text-xl font-semibold font-orbitron mb-1 text-foreground">
-                    {member.name}
-                  </h3>
-                  <p className="text-primary font-medium text-sm">
-                    {member.role}
-                  </p>
-                </div>
-
-                {/* Intro */}
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {member.intro}
-                </p>
-
-                {/* Social Links */}
-                {Object.keys(member.socials).length > 0 && (
-                  <div className="flex flex-wrap justify-center gap-2 pt-2">
-                    {member.socials.linkedin && <SocialButton type="linkedin" url={member.socials.linkedin} />}
-                    {member.socials.whatsapp && <SocialButton type="whatsapp" url={member.socials.whatsapp} />}
-                    {member.socials.discord && <SocialButton type="discord" url={member.socials.discord} />}
-                    {member.socials.youtube && <SocialButton type="youtube" url={member.socials.youtube} />}
-                    {member.socials.fiverr && <SocialButton type="fiverr" url={member.socials.fiverr} />}
-                    {member.socials.instagram && <SocialButton type="instagram" url={member.socials.instagram} />}
-                    {member.socials.itchio && <SocialButton type="itchio" url={member.socials.itchio} />}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <TeamGrid />
       </div>
     </section>
   );
