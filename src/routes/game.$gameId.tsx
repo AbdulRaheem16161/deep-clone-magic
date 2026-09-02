@@ -145,18 +145,25 @@ function GamePage() {
     platform === 'android' && hasAndroidGallery ? game.androidScreenshots! : game.screenshots;
   const heroArt = game.screenshots?.[0] ?? game.icon;
 
+  const ratingsHref = '#reviews';
+
   return (
     <div className="min-h-screen bg-background font-sf">
       {/* Top bar */}
-      <header className="sticky top-0 z-40 border-b border-border/50 bg-background/85 backdrop-blur-md">
-        <div className="container mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
-          <Button asChild variant="ghost" size="sm" className="gap-2">
+      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/80 backdrop-blur-xl">
+        <div className="container mx-auto max-w-6xl px-5 py-3 flex items-center justify-between">
+          <Button asChild variant="ghost" size="sm" className="gap-2 rounded-full">
             <Link to="/">
               <Home className="h-4 w-4" />
               Home
             </Link>
           </Button>
-          <Button variant="outline" size="sm" className="gap-2" onClick={() => setShareOpen(true)}>
+          <Button
+            variant="secondary"
+            size="sm"
+            className="gap-2 rounded-full"
+            onClick={() => setShareOpen(true)}
+          >
             <Share2 className="h-4 w-4" />
             Share
           </Button>
@@ -164,64 +171,63 @@ function GamePage() {
       </header>
 
       {/* App Store style hero */}
-      <section className="relative overflow-hidden border-b border-border/50">
+      <section className="relative overflow-hidden">
         {heroArt && (
           <>
             <img
               src={heroArt}
               alt=""
               aria-hidden="true"
-              className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl opacity-50"
+              className="absolute inset-0 h-full w-full scale-125 object-cover blur-3xl opacity-60 saturate-150"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/70 to-background" />
           </>
         )}
 
-        <div className="relative container mx-auto max-w-5xl px-4 py-10 md:py-14">
-          <div className="flex flex-col sm:flex-row sm:items-start gap-6 md:gap-8">
-            <div className="w-28 h-28 md:w-[136px] md:h-[136px] rounded-[26px] overflow-hidden border border-white/15 bg-muted flex items-center justify-center shadow-2xl flex-shrink-0">
+        <div className="relative container mx-auto max-w-6xl px-5 pt-10 pb-8 md:pt-16 md:pb-12">
+          <div className="flex flex-col gap-7 sm:flex-row sm:items-center sm:gap-9">
+            <div className="h-[124px] w-[124px] md:h-[156px] md:w-[156px] flex-shrink-0 overflow-hidden rounded-[30px] border border-white/10 bg-muted shadow-[0_24px_60px_-20px_rgba(0,0,0,0.75)] flex items-center justify-center">
               {game.icon ? (
                 <img
                   src={game.icon}
                   alt={`${game.title} icon`}
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                 />
               ) : (
-                <span className="font-orbitron font-bold text-4xl text-primary">
+                <span className="font-orbitron text-5xl font-bold text-primary">
                   {game.iconFallback}
                 </span>
               )}
             </div>
 
-            <div className="flex-1 min-w-0 space-y-2">
-              <h1 className="text-3xl md:text-[40px] font-bold leading-tight tracking-tight text-foreground">
+            <div className="min-w-0 flex-1 space-y-1.5">
+              <h1 className="text-[34px] md:text-[44px] font-bold leading-[1.05] tracking-[-0.02em] text-foreground">
                 {game.title}
               </h1>
               {game.tagline && (
-                <p className="text-lg md:text-xl font-medium text-muted-foreground">
+                <p className="text-lg md:text-xl font-semibold text-muted-foreground">
                   {game.tagline}
                 </p>
               )}
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground/80">
                 Free · {game.mobile ? 'Windows & Android' : 'Windows'}
-                {count !== null && count > 0 && ` · ${formatCount(count)} downloads`}
               </p>
 
-              <div className="flex flex-wrap items-center gap-2 pt-2">
+              <div className="flex flex-wrap items-center gap-2 pt-3">
                 {game.inProgress && (
-                  <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-primary/15 text-primary border border-primary/30">
+                  <span className="rounded-full border border-primary/30 bg-primary/15 px-2.5 py-1 text-xs font-medium text-primary">
                     In Progress
                   </span>
                 )}
                 {game.community && (
-                  <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-muted text-muted-foreground border border-border/60">
+                  <span className="rounded-full border border-border/60 bg-muted/60 px-2.5 py-1 text-xs font-medium text-muted-foreground">
                     Community title
                   </span>
                 )}
                 {game.badge === 'softec' && (
                   <button
                     onClick={() => setBadgeOpen(true)}
-                    className="flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-orange/10 text-orange border border-orange/30"
+                    className="flex items-center gap-1.5 rounded-full border border-orange/30 bg-orange/10 px-2.5 py-1 text-xs font-medium text-orange transition-colors hover:bg-orange/20"
                   >
                     <Trophy className="h-3.5 w-3.5" />
                     SOFTEC 2nd Position
@@ -235,15 +241,15 @@ function GamePage() {
                 src={softecBadgeUrl}
                 alt="SOFTEC Game Jam 2nd Position badge"
                 onClick={() => setBadgeOpen(true)}
-                className="hidden sm:block w-20 h-20 object-contain cursor-pointer hover:scale-105 transition-transform"
+                className="hidden h-24 w-24 cursor-pointer object-contain transition-transform hover:scale-105 sm:block"
               />
             )}
           </div>
 
           {/* Platform switch + download buttons */}
-          <div className="mt-8 space-y-4">
+          <div className="mt-9 space-y-4">
             {game.mobile && (
-              <div className="inline-flex rounded-full border border-border/60 bg-muted/40 p-1">
+              <div className="inline-flex rounded-full border border-border/50 bg-muted/40 p-1 backdrop-blur">
                 <button
                   onClick={() => setPlatform('pc')}
                   className={`flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
@@ -274,7 +280,7 @@ function GamePage() {
                 <Button
                   asChild
                   size="lg"
-                  className="gap-2 rounded-full bg-foreground hover:bg-foreground/90 text-background"
+                  className="gap-2 rounded-full bg-foreground px-7 text-background shadow-lg hover:bg-foreground/90"
                 >
                   <a
                     href={game.downloadUrl}
@@ -294,7 +300,7 @@ function GamePage() {
                   <Button
                     asChild
                     size="lg"
-                    className="gap-2 rounded-full bg-foreground hover:bg-foreground/90 text-background"
+                    className="gap-2 rounded-full bg-foreground px-7 text-background shadow-lg hover:bg-foreground/90"
                   >
                     <a
                       href={game.apkUrl}
@@ -318,52 +324,64 @@ function GamePage() {
         </div>
       </section>
 
-      {/* Info strip */}
-      <section className="border-b border-border/50 bg-muted/20">
-        <div className="container mx-auto max-w-5xl px-4">
-          <dl className="grid grid-cols-2 divide-border/50 py-6 text-center sm:grid-cols-3 md:grid-cols-4 sm:divide-x">
-            {!game.createdBy?.length && (
-              <div className="px-2 py-2">
-                <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                  Developer
-                </dt>
-                <dd className="mt-1 text-sm font-semibold text-foreground">
-                  {game.community ? (
-                    game.developer ?? 'Community'
-                  ) : (
-                    <button
-                      onClick={() => setTeamOpen(true)}
-                      className="underline decoration-dotted underline-offset-4 transition-colors hover:text-primary"
-                    >
-                      DeepCut Originals
-                    </button>
-                  )}
-                </dd>
-              </div>
-            )}
-            <div className="px-2 py-2">
-              <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+      {/* App Store style stats strip */}
+      <section className="border-y border-border/40 bg-card/40">
+        <div className="container mx-auto max-w-6xl px-5">
+          <dl className="grid grid-cols-2 gap-y-7 py-7 text-center sm:grid-cols-4 sm:divide-x sm:divide-border/40">
+            <a href={ratingsHref} className="px-3 transition-opacity hover:opacity-80">
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                Downloads
+              </dt>
+              <dd className="mt-1.5 text-[26px] font-semibold leading-none text-foreground">
+                {count !== null ? formatCount(count) : '—'}
+              </dd>
+              <p className="mt-1.5 text-xs text-muted-foreground">Total</p>
+            </a>
+
+            <div className="px-3">
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
                 Size
               </dt>
-              <dd className="mt-1 text-sm font-semibold text-foreground">{game.size ?? '—'}</dd>
+              <dd className="mt-1.5 text-[26px] font-semibold leading-none text-foreground">
+                {game.size ?? '—'}
+              </dd>
+              <p className="mt-1.5 text-xs text-muted-foreground">Download</p>
             </div>
-            <div className="px-2 py-2">
-              <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+
+            <div className="px-3">
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
                 Platform
               </dt>
-              <dd className="mt-1 text-sm font-semibold text-foreground">
-                {game.mobile ? 'PC · Android' : 'PC'}
+              <dd className="mt-1.5 text-[26px] font-semibold leading-none text-foreground">
+                {game.mobile ? 'PC · APK' : 'PC'}
               </dd>
+              <p className="mt-1.5 text-xs text-muted-foreground">
+                {game.mobile ? 'Windows & Android' : 'Windows'}
+              </p>
             </div>
-            <div className="px-2 py-2">
-              <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                Price
+
+            <div className="px-3">
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                Developer
               </dt>
-              <dd className="mt-1 text-sm font-semibold text-foreground">Free</dd>
+              <dd className="mt-1.5 text-[20px] font-semibold leading-tight text-foreground">
+                {game.community ? (
+                  (game.developer ?? (game.createdBy?.length ? 'Community team' : 'Community'))
+                ) : (
+                  <button
+                    onClick={() => setTeamOpen(true)}
+                    className="underline decoration-dotted underline-offset-4 transition-colors hover:text-primary"
+                  >
+                    DeepCut Originals
+                  </button>
+                )}
+              </dd>
+              <p className="mt-1.5 text-xs text-muted-foreground">Free · No ads</p>
             </div>
           </dl>
         </div>
       </section>
+
 
       <main className="container mx-auto max-w-5xl px-4 py-12 space-y-14">
         {/* Screenshots */}
