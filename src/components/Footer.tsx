@@ -1,9 +1,13 @@
 import React from 'react';
 import { Mail, MapPin, MessageCircle, Linkedin } from 'lucide-react';
 import logoImage from '@/assets/logo-new.png';
+import { useVisitCount } from '@/lib/visits';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const visits = useVisitCount();
+
+
   
   const navLinks = [
     { label: 'Home', href: '#home' },
