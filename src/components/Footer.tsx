@@ -141,7 +141,11 @@ const Footer = () => {
             © {currentYear} <span className="text-background font-medium">DeepCut</span>{' '}
             <span className="text-orange font-medium">Originals</span>. All rights reserved.
           </p>
+          {visits !== null && (
+            <p className="mt-2 text-[10px] text-background/30 tabular-nums">{visits}</p>
+          )}
         </div>
+
       </div>
     </footer>
   );
