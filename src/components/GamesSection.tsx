@@ -21,9 +21,8 @@ const GamesSection = () => {
             <h4 className="text-2xl md:text-3xl font-orbitron font-bold text-foreground">
               Games by other creators
             </h4>
-            <p className="text-muted-foreground mt-2">
-              Titles built by talented creators from our community
-            </p>
+            <p className="text-muted-foreground mt-2">Titles built by talented creators</p>
+
           </div>
 
           <GameCardsList items={communityGames} />
