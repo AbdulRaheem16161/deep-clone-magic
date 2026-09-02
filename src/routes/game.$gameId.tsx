@@ -383,26 +383,34 @@ function GamePage() {
       </section>
 
 
-      <main className="container mx-auto max-w-5xl px-4 py-12 space-y-14">
+      <main className="container mx-auto max-w-6xl px-5 py-12 space-y-16 md:py-16">
         {/* Screenshots */}
         {shots && shots.length > 0 && (
-          <section className="space-y-4">
-            <h2 className="text-[22px] font-semibold tracking-tight text-foreground">
-              Preview{game.mobile ? ` — ${platform === 'android' ? 'Android' : 'Windows'}` : ''}
-            </h2>
-            <div className="flex gap-4 overflow-x-auto pb-3 snap-x">
+          <section className="space-y-5">
+            <div className="flex items-end justify-between gap-4">
+              <h2 className="text-[24px] font-semibold tracking-[-0.01em] text-foreground">
+                Preview{game.mobile ? ` — ${platform === 'android' ? 'Android' : 'Windows'}` : ''}
+              </h2>
+              <p className="hidden text-xs text-muted-foreground sm:block">Tap to enlarge</p>
+            </div>
+            <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4">
               {shots.map((src, i) => (
                 <button
                   key={src}
                   onClick={() => setZoomed(src)}
-                  className="snap-start flex-shrink-0 w-[300px] md:w-[440px] aspect-video rounded-2xl overflow-hidden border border-border/50 shadow-lg hover:border-primary/60 transition-colors"
+                  className={`group relative flex-shrink-0 snap-start overflow-hidden rounded-[18px] border border-border/40 bg-muted shadow-[0_18px_40px_-24px_rgba(0,0,0,0.8)] transition-transform duration-300 hover:-translate-y-1 ${
+                    platform === 'android' && hasAndroidGallery
+                      ? 'aspect-[9/19] w-[210px]'
+                      : 'aspect-video w-[320px] md:w-[520px]'
+                  }`}
                 >
                   <img
                     src={src}
                     alt={`${game.title} screenshot ${i + 1}`}
                     loading="lazy"
-                    className="w-full h-full object-cover"
+                    className="h-full w-full object-cover"
                   />
+                  <span className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/5" />
                 </button>
               ))}
             </div>
@@ -411,13 +419,16 @@ function GamePage() {
 
         {/* Videos */}
         {game.videos.length > 0 && (
-          <section className="space-y-4">
-            <h2 className="text-[22px] font-semibold tracking-tight text-foreground">Videos</h2>
-            <div className="grid gap-5 md:grid-cols-2">
+          <section className="space-y-5">
+            <h2 className="text-[24px] font-semibold tracking-[-0.01em] text-foreground">Videos</h2>
+            <div className="grid gap-6 md:grid-cols-2">
               {game.videos.map((v) => (
-                <div key={v.youtubeId} className="space-y-2">
-                  <p className="text-sm text-muted-foreground">{v.label}</p>
+                <div
+                  key={v.youtubeId}
+                  className="overflow-hidden rounded-[18px] border border-border/40 bg-card/50"
+                >
                   <YouTubeEmbed id={v.youtubeId} title={`${game.title} — ${v.label}`} />
+                  <p className="px-4 py-3 text-sm font-medium text-foreground">{v.label}</p>
                 </div>
               ))}
             </div>
@@ -426,11 +437,16 @@ function GamePage() {
 
         {/* Credits */}
         {game.createdBy && game.createdBy.length > 0 && (
-          <section className="space-y-3">
-            <h2 className="text-[22px] font-semibold tracking-tight text-foreground">Created by</h2>
-            <ul className="space-y-1">
+          <section className="space-y-4">
+            <h2 className="text-[24px] font-semibold tracking-[-0.01em] text-foreground">
+              Created by
+            </h2>
+            <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {game.createdBy.map((name) => (
-                <li key={name} className="text-base text-muted-foreground">
+                <li
+                  key={name}
+                  className="rounded-2xl border border-border/40 bg-card/50 px-4 py-3 text-sm font-medium text-foreground"
+                >
                   {name}
                 </li>
               ))}
@@ -438,17 +454,58 @@ function GamePage() {
           </section>
         )}
 
-        <GameReviews gameId={game.id} gameTitle={game.title} />
+        <div id="reviews" className="scroll-mt-24">
+          <GameReviews gameId={game.id} gameTitle={game.title} />
+        </div>
+
+        {/* Information */}
+        <section className="space-y-5">
+          <h2 className="text-[24px] font-semibold tracking-[-0.01em] text-foreground">
+            Information
+          </h2>
+          <dl className="grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div>
+              <dt className="text-sm text-muted-foreground">Provider</dt>
+              <dd className="mt-1 text-sm font-medium text-foreground">
+                {game.community ? (game.developer ?? 'Community') : 'DeepCut Originals'}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-sm text-muted-foreground">Size</dt>
+              <dd className="mt-1 text-sm font-medium text-foreground">{game.size ?? '—'}</dd>
+            </div>
+            <div>
+              <dt className="text-sm text-muted-foreground">Compatibility</dt>
+              <dd className="mt-1 text-sm font-medium text-foreground">
+                {game.mobile ? 'Windows 10+ · Android 8+' : 'Windows 10 or later'}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-sm text-muted-foreground">Languages</dt>
+              <dd className="mt-1 text-sm font-medium text-foreground">English</dd>
+            </div>
+            <div>
+              <dt className="text-sm text-muted-foreground">Price</dt>
+              <dd className="mt-1 text-sm font-medium text-foreground">Free</dd>
+            </div>
+            <div>
+              <dt className="text-sm text-muted-foreground">Status</dt>
+              <dd className="mt-1 text-sm font-medium text-foreground">
+                {game.inProgress ? 'In development' : 'Released'}
+              </dd>
+            </div>
+          </dl>
+        </section>
 
         {/* Other games */}
-        <section className="space-y-5 border-t border-border/50 pt-10">
+        <section className="space-y-5 border-t border-border/40 pt-12">
           <div className="flex items-center justify-between gap-4">
-            <h2 className="text-[22px] font-semibold tracking-tight text-foreground">
-              View other games
+            <h2 className="text-[24px] font-semibold tracking-[-0.01em] text-foreground">
+              You might also like
             </h2>
-            <Button asChild variant="outline" size="sm" className="gap-1 rounded-full">
+            <Button asChild variant="ghost" size="sm" className="gap-1 rounded-full">
               <Link to="/" hash="games">
-                See all games
+                See all
                 <ChevronRight className="h-4 w-4" />
               </Link>
             </Button>
@@ -456,7 +513,7 @@ function GamePage() {
 
           <GameCardsList excludeId={game.id} />
 
-          <div className="space-y-4 pt-6">
+          <div className="space-y-4 pt-8">
             <h3 className="text-lg font-semibold tracking-tight text-foreground">
               Games by other creators
             </h3>
@@ -464,6 +521,7 @@ function GamePage() {
           </div>
         </section>
       </main>
+
 
       <Dialog open={teamOpen} onOpenChange={setTeamOpen}>
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-background">
