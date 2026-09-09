@@ -224,7 +224,7 @@ const MeetTheTeam = () => {
     <section id="team" className="py-20 px-4 bg-muted/30">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-orbitron font-bold mb-4 text-foreground">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-sf font-bold tracking-[-0.02em] mb-4 text-foreground">
             Meet The <span className="text-primary">Team</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
