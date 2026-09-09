@@ -241,9 +241,10 @@ function GamePage() {
                 src={softecBadgeUrl}
                 alt="SOFTEC Game Jam 2nd Position badge"
                 onClick={() => setBadgeOpen(true)}
-                className="hidden h-24 w-24 cursor-pointer object-contain transition-transform hover:scale-105 sm:block"
+                className="hidden h-24 w-24 cursor-pointer rounded-full bg-background/60 object-cover p-1 ring-1 ring-orange/40 transition-transform hover:scale-105 sm:block"
               />
             )}
+
           </div>
 
           {/* Platform switch + download buttons */}
@@ -327,7 +328,7 @@ function GamePage() {
       {/* App Store style stats strip */}
       <section className="border-y border-border/40 bg-card/40">
         <div className="container mx-auto max-w-6xl px-5">
-          <dl className="grid grid-cols-2 gap-y-7 py-7 text-center sm:grid-cols-4 sm:divide-x sm:divide-border/40">
+          <dl className="grid grid-cols-2 gap-y-7 py-7 text-center sm:grid-cols-3 lg:grid-cols-5 sm:divide-x sm:divide-border/40">
             <a href={ratingsHref} className="px-3 transition-opacity hover:opacity-80">
               <dt className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
                 Downloads
@@ -338,15 +339,30 @@ function GamePage() {
               <p className="mt-1.5 text-xs text-muted-foreground">Total</p>
             </a>
 
+            {!game.community && (
+              <div className="px-3">
+                <dt className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                  Views
+                </dt>
+                <dd className="mt-1.5 text-[26px] font-semibold leading-none text-foreground">
+                  {views !== null ? formatCount(views) : '—'}
+                </dd>
+                <p className="mt-1.5 text-xs text-muted-foreground">Live</p>
+              </div>
+            )}
+
             <div className="px-3">
               <dt className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
                 Size
               </dt>
               <dd className="mt-1.5 text-[26px] font-semibold leading-none text-foreground">
-                {game.size ?? '—'}
+                {(platform === 'android' && game.mobile ? game.apkSize : game.size) ??
+                  game.size ??
+                  '—'}
               </dd>
               <p className="mt-1.5 text-xs text-muted-foreground">Download</p>
             </div>
+
 
             <div className="px-3">
               <dt className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
