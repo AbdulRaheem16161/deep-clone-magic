@@ -9,7 +9,7 @@ import {
 
 const navItems = [
   { label: 'Games', icon: Gamepad2, target: 'games' },
-  { label: 'Trailers', icon: Film, target: 'trailers' },
+  { label: 'Cinematic Cut-Scenes', icon: Film, target: 'trailers' },
   { label: 'Art', icon: Palette, target: 'art' },
   { label: 'Environments', icon: TreePine, target: 'environments' },
   { label: '3D Models', icon: Box, target: '3d-models' },

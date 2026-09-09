@@ -203,7 +203,7 @@ const SectionHeader = ({
   title: string;
   subtitle?: string;
 }) => <div className="mb-8">
-    <h3 className="text-2xl md:text-3xl font-orbitron font-bold text-foreground">{title}</h3>
+    <h3 className="text-2xl md:text-3xl font-sf font-bold tracking-[-0.02em] text-foreground">{title}</h3>
     {subtitle && <p className="mt-2 text-[#65758b]">{subtitle}</p>}
   </div>;
 const PortfolioSection = () => {
@@ -217,7 +217,7 @@ const PortfolioSection = () => {
 
           {/* Character Designs */}
           <div className="mb-10">
-            <h4 className="text-lg md:text-xl font-orbitron font-semibold text-foreground mb-4">
+            <h4 className="text-lg md:text-xl font-sf font-semibold tracking-[-0.01em] text-foreground mb-4">
               Character Designs
             </h4>
             <CharacterDesignsGrid items={artCategories.characterDesigns} onImageClick={setZoomedArtImage} />
@@ -225,7 +225,7 @@ const PortfolioSection = () => {
 
           {/* Digital Portraits */}
           <div className="mb-10">
-            <h4 className="text-lg md:text-xl font-orbitron font-semibold text-foreground mb-4">
+            <h4 className="text-lg md:text-xl font-sf font-semibold tracking-[-0.01em] text-foreground mb-4">
               Digital Portraits
             </h4>
             <DigitalPortraitsGrid items={artCategories.digitalPortraits} onImageClick={setZoomedArtImage} />

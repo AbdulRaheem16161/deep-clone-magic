@@ -54,11 +54,15 @@ export const GameRow = ({ game }: { game: Game }) => {
 export const GameCardsList = ({
   excludeId,
   items,
+  center,
 }: {
   excludeId?: string;
   items?: Game[];
+  center?: boolean;
 }) => (
-  <div className="flex flex-wrap items-center gap-5">
+  <div
+    className={`flex flex-wrap items-center gap-5 ${center ? 'justify-center' : ''}`}
+  >
     {(items ?? studioGames)
       .filter((g) => g.id !== excludeId)
       .map((game) => (
@@ -66,5 +70,6 @@ export const GameCardsList = ({
       ))}
   </div>
 );
+
 
 export default GameCardsList;

@@ -54,16 +54,19 @@ export type Database = {
           download_count: number
           download_size: string
           game_id: string
+          view_count: number
         }
         Insert: {
           download_count?: number
           download_size?: string
           game_id: string
+          view_count?: number
         }
         Update: {
           download_count?: number
           download_size?: string
           game_id?: string
+          view_count?: number
         }
         Relationships: []
       }
@@ -88,6 +91,7 @@ export type Database = {
     }
     Functions: {
       increment_downloads: { Args: { p_game_id: string }; Returns: number }
+      increment_views: { Args: { p_game_id: string }; Returns: number }
       record_visit: { Args: { p_visitor_id: string }; Returns: number }
     }
     Enums: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, MapPin, MessageCircle, Linkedin } from 'lucide-react';
+import { MapPin, MessageCircle, Linkedin } from 'lucide-react';
 import logoImage from '@/assets/logo-new.png';
 import { useVisitCount } from '@/lib/visits';
 
@@ -75,15 +75,6 @@ const Footer = () => {
                 <span className="text-sm">03364518167</span>
               </a>
               <a 
-                href="mailto:deepcutoriginals@gmail.com"
-                className="flex items-center gap-3 text-background/70 hover:text-background transition-colors duration-300 group"
-              >
-                <div className="w-8 h-8 rounded-full bg-background/10 flex items-center justify-center group-hover:bg-background/20 transition-colors">
-                  <Mail className="h-4 w-4" />
-                </div>
-                <span className="text-sm">deepcutoriginals@gmail.com</span>
-              </a>
-              <a 
                 href="https://maps.app.goo.gl/eANRvQ3ukSj1HhMv6"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -111,13 +102,6 @@ const Footer = () => {
             className="w-10 h-10 rounded-full bg-background/10 hover:bg-background/20 flex items-center justify-center text-background/70 hover:text-background transition-all duration-300"
           >
             <MessageCircle className="h-5 w-5" />
-          </a>
-          <a 
-            href="mailto:deepcutoriginals@gmail.com" 
-            aria-label="Email"
-            className="w-10 h-10 rounded-full bg-background/10 hover:bg-background/20 flex items-center justify-center text-background/70 hover:text-background transition-all duration-300"
-          >
-            <Mail className="h-5 w-5" />
           </a>
           <a 
             href="https://maps.app.goo.gl/eANRvQ3ukSj1HhMv6" 

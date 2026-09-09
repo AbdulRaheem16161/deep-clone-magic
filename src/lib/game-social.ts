@@ -38,7 +38,45 @@ export function useDownloadCount(gameId: string) {
   }, [gameId, load]);
 
   return { count, register };
+  return { count, register };
 }
+
+/**
+ * Live page-view counter for a game. Counts every visit and stays in sync
+ * across all open browsers through realtime updates.
+ */
+export function useViewCount(gameId: string) {
+  const [views, setViews] = useState<number | null>(null);
+
+  useEffect(() => {
+    let active = true;
+
+    (async () => {
+      const { data } = await supabase.rpc('increment_views', { p_game_id: gameId });
+      if (active && typeof data === 'number') setViews(data);
+    })();
+
+    const channel = supabase
+      .channel(`game_stats_views_${gameId}`)
+      .on(
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'game_stats', filter: `game_id=eq.${gameId}` },
+        (payload) => {
+          const next = (payload.new as { view_count?: number }).view_count;
+          if (typeof next === 'number') setViews(next);
+        },
+      )
+      .subscribe();
+
+    return () => {
+      active = false;
+      void supabase.removeChannel(channel);
+    };
+  }, [gameId]);
+
+  return views;
+}
+
 
 export function useGameReviews(gameId: string) {
   const [reviews, setReviews] = useState<GameReview[]>([]);
