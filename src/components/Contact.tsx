@@ -27,8 +27,10 @@ const Contact = () => {
             <span className="text-orange">Connect</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Thinking about a game or just want to talk? Send us a message. We are always happy to chat, answer questions and see how we can help!
+            WhatsApp is the fastest way to reach us. Message us about a project, a
+            collaboration or a question — our team responds within a few hours, seven days a week.
           </p>
+
         </div>
 
         <div className="flex justify-center">
