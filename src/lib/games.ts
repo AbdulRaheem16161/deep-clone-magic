@@ -88,6 +88,8 @@ export type Game = {
   badge?: 'softec';
   /** Windows build size, e.g. "111.91 MB" */
   size?: string;
+  /** Android APK size, e.g. "156 MB" */
+  apkSize?: string;
   /** Credits shown as a "Created by" list (multi-person community games) */
   createdBy?: string[];
   /** Single developer name shown in the info strip (overrides the default) */
@@ -169,11 +171,12 @@ export const games: Game[] = [
   {
     id: 'yoma',
     title: 'YOMA',
-    tagline: 'Horror Escape — Story Based',
+    tagline: 'Narrative Horror',
     icon: yomaIcon,
     iconFallback: 'Y',
     downloadUrl: YOMA_URL,
     apkUrl: YOMA_APK_URL,
+    apkSize: '156 MB',
     mobile: true,
     videos: [{ label: 'Gameplay', youtubeId: 'dkD2cCXrAG0' }],
     screenshots: [
@@ -266,6 +269,7 @@ export const games: Game[] = [
     downloadUrl: SHAPIO_URL,
     size: '48.37 MB',
     community: true,
+    developer: 'Game Jamers (ITU)',
     createdBy: ['Mustafa', 'Khairia Batool', 'Esha Durasmeen'],
     screenshots: [
       shapio1Asset,
