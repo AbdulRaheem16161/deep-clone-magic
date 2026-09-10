@@ -139,6 +139,7 @@ function GamePage() {
   const [platform, setPlatform] = useState<'pc' | 'android'>('pc');
   const [teamOpen, setTeamOpen] = useState(false);
   const { count, register } = useDownloadCount(game.id);
+  const views = useViewCount(game.id);
 
   const hasAndroidGallery = !!game.androidScreenshots?.length;
   const shots =
