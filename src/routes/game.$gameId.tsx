@@ -20,7 +20,7 @@ import SoftecBadgeDialog from '@/components/SoftecBadgeDialog';
 import GameCardsList from '@/components/GameCards';
 import GameReviews from '@/components/GameReviews';
 import { TeamGrid } from '@/components/MeetTheTeam';
-import { useDownloadCount, formatCount } from '@/lib/game-social';
+import { useDownloadCount, useViewCount, formatCount } from '@/lib/game-social';
 import { getGame, softecBadgeUrl, communityGames, type Game } from '@/lib/games';
 
 export const Route = createFileRoute('/game/$gameId')({
