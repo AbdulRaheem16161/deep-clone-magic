@@ -12,6 +12,10 @@ import {
   Trophy,
   X,
   ChevronRight,
+  Palette,
+  TreePine,
+  Box,
+  Film,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogClose, DialogTitle } from '@/components/ui/dialog';
@@ -19,9 +23,18 @@ import YouTubeEmbed from '@/components/YouTubeEmbed';
 import SoftecBadgeDialog from '@/components/SoftecBadgeDialog';
 import GameCardsList from '@/components/GameCards';
 import GameReviews from '@/components/GameReviews';
+import Footer from '@/components/Footer';
 import { TeamGrid } from '@/components/MeetTheTeam';
 import { useDownloadCount, useViewCount, formatCount } from '@/lib/game-social';
 import { getGame, softecBadgeUrl, communityGames, type Game } from '@/lib/games';
+
+const exploreLinks = [
+  { label: 'Art', hash: 'art', icon: Palette },
+  { label: 'Environments', hash: 'environments', icon: TreePine },
+  { label: '3D Models', hash: '3d-models', icon: Box },
+  { label: 'Cinematic Cut-Scenes', hash: 'trailers', icon: Film },
+];
+
 
 export const Route = createFileRoute('/game/$gameId')({
   loader: ({ params }) => {
