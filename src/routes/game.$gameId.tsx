@@ -12,6 +12,10 @@ import {
   Trophy,
   X,
   ChevronRight,
+  Palette,
+  TreePine,
+  Box,
+  Film,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogClose, DialogTitle } from '@/components/ui/dialog';
@@ -19,9 +23,18 @@ import YouTubeEmbed from '@/components/YouTubeEmbed';
 import SoftecBadgeDialog from '@/components/SoftecBadgeDialog';
 import GameCardsList from '@/components/GameCards';
 import GameReviews from '@/components/GameReviews';
+import Footer from '@/components/Footer';
 import { TeamGrid } from '@/components/MeetTheTeam';
 import { useDownloadCount, useViewCount, formatCount } from '@/lib/game-social';
 import { getGame, softecBadgeUrl, communityGames, type Game } from '@/lib/games';
+
+const exploreLinks = [
+  { label: 'Art', hash: 'art', icon: Palette },
+  { label: 'Environments', hash: 'environments', icon: TreePine },
+  { label: '3D Models', hash: '3d-models', icon: Box },
+  { label: 'Cinematic Cut-Scenes', hash: 'trailers', icon: Film },
+];
+
 
 export const Route = createFileRoute('/game/$gameId')({
   loader: ({ params }) => {
@@ -537,7 +550,50 @@ function GamePage() {
             <GameCardsList items={communityGames.filter((g) => g.id !== game.id)} />
           </div>
         </section>
+
+        {/* Explore the studio */}
+        <section className="space-y-6 border-t border-border/40 pt-12">
+          <div className="text-center space-y-2">
+            <h2 className="text-[24px] font-semibold tracking-[-0.01em] text-foreground">
+              Explore more of our work
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Jump straight into the studio showreel
+            </p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {exploreLinks.map((item) => (
+              <Link
+                key={item.hash}
+                to="/"
+                hash={item.hash}
+                className="group flex items-center gap-3 rounded-2xl border border-border/40 bg-card/50 px-4 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-card/80 hover:shadow-[0_16px_40px_-24px_rgba(0,0,0,0.8)]"
+              >
+                <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <item.icon className="h-5 w-5" />
+                </span>
+                <span className="min-w-0 flex-1 text-sm font-semibold text-foreground">
+                  {item.label}
+                </span>
+                <ChevronRight className="h-4 w-4 flex-shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+              </Link>
+            ))}
+          </div>
+
+          <div className="flex justify-center pt-4">
+            <Button asChild size="lg" className="gap-2 rounded-full px-7">
+              <Link to="/">
+                <Home className="h-5 w-5" />
+                Back to Home
+              </Link>
+            </Button>
+          </div>
+        </section>
       </main>
+
+      <Footer />
+
 
 
       <Dialog open={teamOpen} onOpenChange={setTeamOpen}>
