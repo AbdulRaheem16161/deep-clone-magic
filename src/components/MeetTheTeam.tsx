@@ -126,13 +126,14 @@ const SocialButton = ({
   type,
   url
 }: {
-  type: 'youtube' | 'linkedin' | 'fiverr' | 'whatsapp' | 'discord' | 'instagram' | 'itchio';
+  type: 'youtube' | 'linkedin' | 'fiverr' | 'behance' | 'whatsapp' | 'discord' | 'instagram' | 'itchio';
   url: string;
 }) => {
   const icons = {
     youtube: <YoutubeIcon />,
     linkedin: <LinkedInIcon />,
     fiverr: <FiverrIcon />,
+    behance: <BehanceIcon />,
     whatsapp: <WhatsAppIcon />,
     discord: <DiscordIcon />,
     instagram: <InstagramIcon />,
@@ -143,6 +144,7 @@ const SocialButton = ({
     youtube: 'YouTube',
     linkedin: 'LinkedIn',
     fiverr: 'Fiverr',
+    behance: 'Behance',
     whatsapp: 'WhatsApp',
     discord: 'Discord',
     instagram: 'Instagram',
@@ -153,6 +155,7 @@ const SocialButton = ({
     youtube: 'hover:bg-red-600 hover:text-white',
     linkedin: 'hover:bg-blue-600 hover:text-white',
     fiverr: 'hover:bg-green-500 hover:text-white',
+    behance: 'hover:bg-blue-500 hover:text-white',
     whatsapp: 'hover:bg-green-500 hover:text-white',
     discord: 'hover:bg-indigo-600 hover:text-white',
     instagram: 'hover:bg-pink-600 hover:text-white',
@@ -200,11 +203,6 @@ export const TeamGrid = () => (
             </p>
           </div>
 
-          {/* Intro */}
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {member.intro}
-          </p>
-
           {/* Social Links */}
           {Object.keys(member.socials).length > 0 && (
             <div className="flex flex-wrap justify-center gap-2 pt-2">
@@ -213,6 +211,7 @@ export const TeamGrid = () => (
               {member.socials.discord && <SocialButton type="discord" url={member.socials.discord} />}
               {member.socials.youtube && <SocialButton type="youtube" url={member.socials.youtube} />}
               {member.socials.fiverr && <SocialButton type="fiverr" url={member.socials.fiverr} />}
+              {member.socials.behance && <SocialButton type="behance" url={member.socials.behance} />}
               {member.socials.instagram && <SocialButton type="instagram" url={member.socials.instagram} />}
               {member.socials.itchio && <SocialButton type="itchio" url={member.socials.itchio} />}
             </div>
