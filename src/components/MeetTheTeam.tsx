@@ -40,6 +40,12 @@ const FiverrIcon = () => (
   </svg>
 );
 
+const BehanceIcon = () => (
+  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
+    <path d="M7.799 5.698c.581 0 1.119.052 1.606.156.487.103.906.273 1.254.508.348.235.618.548.813.94.194.391.291.878.291 1.46 0 .627-.142 1.149-.427 1.565-.284.416-.706.758-1.264 1.024.762.22 1.331.605 1.705 1.155.374.549.561 1.212.561 1.987 0 .635-.122 1.184-.366 1.647-.244.463-.574.842-.988 1.137-.414.295-.888.512-1.421.651-.533.139-1.083.208-1.65.208H0V5.698h7.799zM7.448 10.1c.494 0 .899-.118 1.213-.354.314-.236.471-.618.471-1.146 0-.294-.052-.536-.157-.727a1.13 1.13 0 0 0-.435-.445 1.874 1.874 0 0 0-.634-.221 3.647 3.647 0 0 0-.733-.067H3.126V10.1h4.322zm.193 4.854c.272 0 .53-.027.775-.081a1.86 1.86 0 0 0 .642-.264 1.36 1.36 0 0 0 .446-.483c.111-.2.166-.455.166-.765 0-.604-.171-1.034-.513-1.29-.342-.257-.795-.385-1.359-.385H3.126v3.268h4.515zM16.023 15.09c.35.342.853.513 1.509.513.471 0 .878-.119 1.221-.357.342-.238.551-.49.63-.757h2.05c-.328 1.017-.831 1.744-1.51 2.182-.679.438-1.5.657-2.464.657-.668 0-1.271-.107-1.807-.322a3.779 3.779 0 0 1-1.357-.905 4.032 4.032 0 0 1-.86-1.415c-.198-.553-.297-1.162-.297-1.828 0-.643.102-1.242.305-1.797a4.2 4.2 0 0 1 .875-1.44 4.114 4.114 0 0 1 1.348-.955c.526-.229 1.11-.344 1.752-.344.726 0 1.36.14 1.902.42.542.28.987.658 1.334 1.134.347.476.597 1.02.754 1.632.157.612.212 1.252.166 1.92h-6.118c.023.68.207 1.224.552 1.61zm3.895-4.347c-.277-.306-.7-.46-1.269-.46-.372 0-.68.063-.926.19a1.7 1.7 0 0 0-.578.478 1.75 1.75 0 0 0-.297.607 2.71 2.71 0 0 0-.097.56h3.72c-.054-.6-.248-1.069-.553-1.375zM15.075 6.11h4.66v1.134h-4.66V6.11z"/>
+  </svg>
+);
+
 const InstagramIcon = () => (
   <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
@@ -55,7 +61,6 @@ const ItchIcon = () => (
 interface TeamMember {
   name: string;
   role: string;
-  intro: string;
   initials: string;
   image?: string;
   socials: {
@@ -64,6 +69,7 @@ interface TeamMember {
     discord?: string;
     youtube?: string;
     fiverr?: string;
+    behance?: string;
     instagram?: string;
     itchio?: string;
   };
@@ -73,7 +79,6 @@ const teamMembers: TeamMember[] = [
   {
     name: 'AbdulRaheem',
     role: 'Programmer',
-    intro: 'I build immersive gaming experiences with clean, efficient code.',
     initials: 'AR',
     image: abdulraheemImg,
     socials: {
@@ -85,7 +90,6 @@ const teamMembers: TeamMember[] = [
   {
     name: 'Snek RB',
     role: '3D Modeler & Animator',
-    intro: 'I bring characters and worlds to life through 3D art and animation.',
     initials: 'SR',
     image: snekRbImg,
     socials: {
@@ -94,8 +98,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: 'Raptor Bot',
-    role: 'Game Designer',
-    intro: 'I design engaging gameplay loops and memorable experiences.',
+    role: 'Game Designer and Concept Artist',
     initials: 'RB',
     image: raptorbotImg,
     socials: {
@@ -106,13 +109,13 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: 'Kaires',
-    role: 'Digital Artist',
-    intro: 'I make stunning character designs and concept art.',
+    role: 'Digital Artist and Animator',
     initials: 'KA',
     image: kairesImg,
     socials: {
       linkedin: 'https://linkedin.com/in/kaires-artworks',
       fiverr: 'https://www.fiverr.com/kairesart',
+      behance: 'https://www.behance.net/kaires-artworks',
       instagram: 'https://www.instagram.com/kairesartworks/'
     }
   }
@@ -122,13 +125,14 @@ const SocialButton = ({
   type,
   url
 }: {
-  type: 'youtube' | 'linkedin' | 'fiverr' | 'whatsapp' | 'discord' | 'instagram' | 'itchio';
+  type: 'youtube' | 'linkedin' | 'fiverr' | 'behance' | 'whatsapp' | 'discord' | 'instagram' | 'itchio';
   url: string;
 }) => {
   const icons = {
     youtube: <YoutubeIcon />,
     linkedin: <LinkedInIcon />,
     fiverr: <FiverrIcon />,
+    behance: <BehanceIcon />,
     whatsapp: <WhatsAppIcon />,
     discord: <DiscordIcon />,
     instagram: <InstagramIcon />,
@@ -139,6 +143,7 @@ const SocialButton = ({
     youtube: 'YouTube',
     linkedin: 'LinkedIn',
     fiverr: 'Fiverr',
+    behance: 'Behance',
     whatsapp: 'WhatsApp',
     discord: 'Discord',
     instagram: 'Instagram',
@@ -149,6 +154,7 @@ const SocialButton = ({
     youtube: 'hover:bg-red-600 hover:text-white',
     linkedin: 'hover:bg-blue-600 hover:text-white',
     fiverr: 'hover:bg-green-500 hover:text-white',
+    behance: 'hover:bg-blue-500 hover:text-white',
     whatsapp: 'hover:bg-green-500 hover:text-white',
     discord: 'hover:bg-indigo-600 hover:text-white',
     instagram: 'hover:bg-pink-600 hover:text-white',
@@ -196,11 +202,6 @@ export const TeamGrid = () => (
             </p>
           </div>
 
-          {/* Intro */}
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {member.intro}
-          </p>
-
           {/* Social Links */}
           {Object.keys(member.socials).length > 0 && (
             <div className="flex flex-wrap justify-center gap-2 pt-2">
@@ -209,6 +210,7 @@ export const TeamGrid = () => (
               {member.socials.discord && <SocialButton type="discord" url={member.socials.discord} />}
               {member.socials.youtube && <SocialButton type="youtube" url={member.socials.youtube} />}
               {member.socials.fiverr && <SocialButton type="fiverr" url={member.socials.fiverr} />}
+              {member.socials.behance && <SocialButton type="behance" url={member.socials.behance} />}
               {member.socials.instagram && <SocialButton type="instagram" url={member.socials.instagram} />}
               {member.socials.itchio && <SocialButton type="itchio" url={member.socials.itchio} />}
             </div>
