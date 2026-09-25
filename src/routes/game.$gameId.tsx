@@ -428,11 +428,7 @@ function GamePage() {
                 <button
                   key={src}
                   onClick={() => setZoomed(src)}
-                  className={`group relative flex-shrink-0 snap-start overflow-hidden rounded-[18px] border border-border/40 bg-muted shadow-[0_18px_40px_-24px_rgba(0,0,0,0.8)] transition-transform duration-300 hover:-translate-y-1 ${
-                    platform === 'android' && hasAndroidGallery
-                      ? 'aspect-[9/19] w-[210px]'
-                      : 'aspect-video w-[320px] md:w-[520px]'
-                  }`}
+                  className="group relative aspect-video w-[320px] flex-shrink-0 snap-start overflow-hidden rounded-[18px] border border-border/40 bg-muted shadow-[0_18px_40px_-24px_rgba(0,0,0,0.8)] transition-transform duration-300 hover:-translate-y-1 md:w-[520px]"
                 >
                   <img
                     src={src}
