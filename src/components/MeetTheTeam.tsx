@@ -61,7 +61,6 @@ const ItchIcon = () => (
 interface TeamMember {
   name: string;
   role: string;
-  intro: string;
   initials: string;
   image?: string;
   socials: {
@@ -70,6 +69,7 @@ interface TeamMember {
     discord?: string;
     youtube?: string;
     fiverr?: string;
+    behance?: string;
     instagram?: string;
     itchio?: string;
   };
@@ -91,7 +91,6 @@ const teamMembers: TeamMember[] = [
   {
     name: 'Snek RB',
     role: '3D Modeler & Animator',
-    intro: 'I bring characters and worlds to life through 3D art and animation.',
     initials: 'SR',
     image: snekRbImg,
     socials: {
@@ -100,8 +99,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: 'Raptor Bot',
-    role: 'Game Designer',
-    intro: 'I design engaging gameplay loops and memorable experiences.',
+    role: 'Game Designer and Concept Artist',
     initials: 'RB',
     image: raptorbotImg,
     socials: {
@@ -112,13 +110,13 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: 'Kaires',
-    role: 'Digital Artist',
-    intro: 'I make stunning character designs and concept art.',
+    role: 'Digital Artist and Animator',
     initials: 'KA',
     image: kairesImg,
     socials: {
       linkedin: 'https://linkedin.com/in/kaires-artworks',
       fiverr: 'https://www.fiverr.com/kairesart',
+      behance: 'https://www.behance.net/kaires-artworks',
       instagram: 'https://www.instagram.com/kairesartworks/'
     }
   }
