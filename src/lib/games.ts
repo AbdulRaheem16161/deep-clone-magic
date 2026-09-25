@@ -42,6 +42,16 @@ import doom6Asset from '@/assets/doom/doom-6.png.asset.json';
 import doom7Asset from '@/assets/doom/doom-7.png.asset.json';
 import doom8Asset from '@/assets/doom/doom-8.png.asset.json';
 import doom9Asset from '@/assets/doom/doom-9.png.asset.json';
+import amongUs2Asset from '@/assets/amongus/Among_US_3D_2.png.asset.json';
+import amongUs3Asset from '@/assets/amongus/Among_US_3D_3.png.asset.json';
+import amongUs4Asset from '@/assets/amongus/Among_US_3D_4.png.asset.json';
+import amongUs5Asset from '@/assets/amongus/Among_US_3D_5.png.asset.json';
+import gumper1Asset from '@/assets/gumper/Gumper_Bumper_World_1.png.asset.json';
+import gumper2Asset from '@/assets/gumper/Gumper_Bumper_World_2.png.asset.json';
+import gumper3Asset from '@/assets/gumper/Gumper_Bumper_World_3.png.asset.json';
+import gumper4Asset from '@/assets/gumper/Gumper_Bumper_World_4.png.asset.json';
+import gumper5Asset from '@/assets/gumper/Gumper_Bumper_World_5.png.asset.json';
+import gumper6Asset from '@/assets/gumper/Gumper_Bumper_World_6.png.asset.json';
 import softecBadgeAsset from '@/assets/community/softec-badge.png.asset.json';
 import ituAwardAsset from '@/assets/community/itu-award.jpg.asset.json';
 
@@ -213,6 +223,14 @@ export const games: Game[] = [
       { label: 'Gameplay', youtubeId: 'e059N0rVpPM' },
       { label: 'Devlog', youtubeId: 'e2TcC0cSglE' },
     ],
+    screenshots: [
+      gumper1Asset,
+      gumper2Asset,
+      gumper3Asset,
+      gumper4Asset,
+      gumper5Asset,
+      gumper6Asset,
+    ].map((a) => assetUrl(a.url)),
   },
   {
     id: 'amongus3d',
@@ -227,6 +245,9 @@ export const games: Game[] = [
       { label: 'Gameplay', youtubeId: 'S9udobAwd8A' },
       { label: 'Devlog', youtubeId: 'S0t_FS6bSyw' },
     ],
+    screenshots: [amongUs2Asset, amongUs3Asset, amongUs4Asset, amongUs5Asset].map((a) =>
+      assetUrl(a.url),
+    ),
   },
   {
     id: 'dino',
