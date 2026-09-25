@@ -79,7 +79,6 @@ const teamMembers: TeamMember[] = [
   {
     name: 'AbdulRaheem',
     role: 'Programmer',
-    intro: 'I build immersive gaming experiences with clean, efficient code.',
     initials: 'AR',
     image: abdulraheemImg,
     socials: {
