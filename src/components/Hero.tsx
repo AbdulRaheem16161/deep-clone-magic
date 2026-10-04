@@ -18,9 +18,11 @@ const Hero = () => {
           {/* Left side - Text and Button */}
           <div className="flex-1 text-center lg:text-left animate-slide-up space-y-8">
             <h1 className="text-4xl md:text-6xl lg:text-[68px] xl:text-[84px] font-sf font-bold leading-tight">
-              <span className="text-foreground">Indie Game</span>{' '}
+              <span className="text-foreground">Indie Game</span>
+              <br />
               <span className="text-foreground font-normal">and</span>{' '}
-              <span className="text-orange">Animation</span>{' '}
+              <span className="text-orange">Animation</span>
+              <br />
               <span className="text-foreground">Studio</span>
             </h1>
 
