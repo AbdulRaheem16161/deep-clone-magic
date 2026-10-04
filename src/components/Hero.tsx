@@ -17,9 +17,11 @@ const Hero = () => {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 pt-24 pb-16">
           {/* Left side - Text and Button */}
           <div className="flex-1 text-center lg:text-left animate-slide-up space-y-8">
-            <h1 className="text-4xl md:text-6xl lg:text-[68px] xl:text-[84px] font-inter font-bold leading-tight">
-              <span className="text-foreground">Indie Game and Animation</span>{' '}
-              <span className="text-orange">Studio</span>
+            <h1 className="text-4xl md:text-6xl lg:text-[68px] xl:text-[84px] font-sf font-bold leading-tight">
+              <span className="text-foreground">Indie Game</span>{' '}
+              <span className="text-foreground font-normal">and</span>{' '}
+              <span className="text-orange">Animation</span>{' '}
+              <span className="text-foreground">Studio</span>
             </h1>
 
 
