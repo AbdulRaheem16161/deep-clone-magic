@@ -17,13 +17,21 @@ const Hero = () => {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 pt-24 pb-16">
           {/* Left side - Text and Button */}
           <div className="flex-1 text-center lg:text-left animate-slide-up space-y-8">
-            <h1 className="text-4xl md:text-6xl lg:text-[62px] xl:text-[74px] font-sf font-bold leading-tight">
-              <span className="text-foreground">Indie Game</span>
-              <br />
-              <span className="text-foreground font-normal">and</span>{' '}
-              <span className="text-orange">Animation</span>
-              <br />
-              <span className="text-foreground">Studio</span>
+            <h1 className="w-max max-w-full font-inter leading-[0.95] text-left">
+              <span className="block whitespace-nowrap text-[clamp(46px,13vw,64px)] font-bold tracking-[-0.045em] text-foreground md:text-[clamp(56px,7vw,76px)] xl:text-[clamp(64px,5.1vw,92px)]">
+                Indie Game
+              </span>
+              <span className="mt-[6px] flex items-baseline gap-[clamp(16px,1.2vw,22px)] whitespace-nowrap">
+                <span className="text-[clamp(38px,10vw,52px)] font-light leading-[0.95] tracking-[-0.04em] text-foreground md:text-[clamp(46px,6vw,62px)] xl:text-[clamp(52px,4.2vw,76px)]">
+                  and
+                </span>
+                <span className="text-[clamp(46px,13vw,64px)] font-bold leading-[0.95] tracking-[-0.045em] text-orange md:text-[clamp(56px,7vw,76px)] xl:text-[clamp(64px,5.1vw,92px)]">
+                  Animation
+                </span>
+              </span>
+              <span className="mt-[6px] block whitespace-nowrap text-[clamp(46px,13vw,64px)] font-bold tracking-[-0.045em] text-foreground md:text-[clamp(56px,7vw,76px)] xl:text-[clamp(64px,5.1vw,92px)]">
+                Studio
+              </span>
             </h1>
 
 
